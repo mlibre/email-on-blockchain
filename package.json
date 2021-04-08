@@ -1,0 +1,19 @@
+{
+  "name": "eob",
+  "version": "0.1.0",
+  "author": "love",
+  "description": "Email on Blockchain",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "electron": "^12.0.2",
+    "eslint": "^7.23.0",
+    "eslint-plugin-node": "^11.1.0"
+  }
+}

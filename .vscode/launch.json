@@ -1,0 +1,31 @@
+{
+	// Use IntelliSense to learn about possible Node.js debug attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Program",
+			"protocol": "inspector",
+			"port": 5000,
+			"stopOnEntry": false,
+			"program": "${workspaceRoot}/pbot.js",
+			"cwd": "${workspaceRoot}",
+			"outFiles": [],
+			"autoAttachChildProcesses": true,
+			"runtimeArgs": [
+				"--inspect=50000"
+			]
+		},
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "Attach to Process",
+			"port": 9229,
+			"protocol": "auto",
+			"outFiles": []
+		}
+	]
+}

@@ -1,0 +1,7 @@
+**/chromData
+node_modules/
+**/ChomeSigned_webrtc
+**/github/
+**/sec.js
+!users/sample_user/sec.js
+!users/sample_user/github
