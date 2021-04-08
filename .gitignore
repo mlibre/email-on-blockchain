@@ -5,3 +5,4 @@ node_modules/
 **/sec.js
 !users/sample_user/sec.js
 !users/sample_user/github
+out/

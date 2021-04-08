@@ -1,7 +1,18 @@
-# Run lbrynet
+# Email Over Blockchain
+
+# requirments
+
+* lbrynet. you can run lbry net by running lbry application.
+
+
+# Run
 ```bash
-lbrynet start
+npm start
 ```
+
+# Other
+https://www.electronjs.org/docs/tutorial/quick-start
+
 
 @mlibre:e/eob-mail-to-marshal
 @mlibreEmails/eob-mail-to-marshal
