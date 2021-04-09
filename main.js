@@ -1,15 +1,14 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
-const {Menu} = require("electron");
 
 // require("electron-reload")(__dirname);
 
 Menu.setApplicationMenu(null);
-function createWindow () 
+function createWindow (width, height) 
 {
 	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width,
+		height,
 		// frame: false,
 		// transparent: true,
 		// titleBarStyle: "hidden",
@@ -25,7 +24,8 @@ function createWindow ()
 
 app.whenReady().then(() => 
 {
-	createWindow();
+	const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+	createWindow(width, height);
 
 	app.on("activate", () => 
 	{
