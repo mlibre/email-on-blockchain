@@ -3138,6 +3138,13 @@
   dependencies:
     "parse-ms" "^2.1.0"
 
+"process-exists@^4.0.0":
+  "integrity" "sha512-BnlcYPiZjSW+fye12g9B7UeCzMAOdMkxuTz3zcytJ2BHwYZf2RoKvuuwUcJLeXlGj58x9YQrvhT21PmKhUc4UQ=="
+  "resolved" "https://registry.npmjs.org/process-exists/-/process-exists-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "ps-list" "^6.3.0"
+
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
   "resolved" "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
@@ -3160,6 +3167,11 @@
   "integrity" "sha1-IS1b/hMYMGpCD2QCuOJv85ZHqEk="
   "resolved" "https://registry.npmjs.org/proto-list/-/proto-list-1.2.4.tgz"
   "version" "1.2.4"
+
+"ps-list@^6.3.0":
+  "integrity" "sha512-qau0czUSB0fzSlBOQt0bo+I2v6R+xiQdj78e1BR/Qjfl5OHWJ/urXi8+ilw1eHe+5hSeDI1wrwVTgDp2wst4oA=="
+  "resolved" "https://registry.npmjs.org/ps-list/-/ps-list-6.3.0.tgz"
+  "version" "6.3.0"
 
 "psl@^1.1.28":
   "integrity" "sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ=="

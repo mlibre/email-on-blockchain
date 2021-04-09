@@ -1,14 +1,20 @@
-window.addEventListener("DOMContentLoaded", () => 
+const processExists = require("process-exists");
+
+window.addEventListener("DOMContentLoaded", async () => 
 {
-	const replaceText = (selector, text) => 
+	const lbrynet = await processExists("lbrynet");
+	if(!lbrynet)
 	{
-		const element = document.getElementById(selector);
-		if (element) element.innerText = text;
-	};
- 
-	for (const type of ["chrome", "node", "electron"]) 
-	{
-		replaceText(`${type}-version`, process.versions[type]);
+		alert("lbrynet is not running");
 	}
-});
+	// const replaceText = (selector, text) => 
+	// {
+	// 	const element = document.getElementById(selector);
+	// 	if (element) element.innerText = text;
+	// };
  
+	// for (const type of ["chrome", "node", "electron"]) 
+	// {
+	// 	replaceText(`${type}-version`, process.versions[type]);
+	// }
+});

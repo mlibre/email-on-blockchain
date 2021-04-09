@@ -1,27 +1,26 @@
 const { app, BrowserWindow, screen, Menu, ipcMain } = require("electron");
+const methods = require("./methods");
 const path = require("path");
 
 // require("electron-reload")(__dirname);
 
 // Menu.setApplicationMenu(null);
 
-ipcMain.on("asynchronous-message", (event, arg) => 
+ipcMain.handle("channels", async (event, ...args) => 
 {
-	console.log(arg);
-
-	// Event emitter for sending asynchronous messages
-	event.sender.send("asynchronous-reply", "async pong");
+	const channels = await methods.channels();
+	return channels;
+	// 	const mails = await methods.received_mails(channel.claim_id);
 });
 
-// Event handler for synchronous incoming messages
-ipcMain.on("synchronous-message", (event, arg) => 
-{
-	console.log(arg); 
 
-	// Synchronous event emmision
-	event.returnValue = "sync pong";
+ipcMain.handle("mails", async (event, cid) => 
+{
+	const mails = await methods.received_mails_2(cid);
+	return mails;
 });
 
+ 
 function createWindow (width, height) 
 {
 	const win = new BrowserWindow({

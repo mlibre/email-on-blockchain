@@ -21,7 +21,7 @@ npm start
 6. reading sent mails
 7. sending email.
 	1. get target channel claim id. ex e2b347558eec20aee84bf4657efa3832bb5a4ab9
-	2. find the last postfix number: ex -4
+	2. find the last postfix number in all channels or just search for the claim: ex -4
 	3. add -number postfix to the name. -5
 	4. name: mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9-5
 	5. send

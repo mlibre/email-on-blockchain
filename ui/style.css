@@ -514,7 +514,7 @@ a:hover {
 }
 #main .message-list li .col-2 .date {
   right: 0;
-  width: 200px;
+  width: 400px;
   padding-left: 80px;
 }
 #main .load-more-link {
@@ -814,4 +814,10 @@ a:hover {
   visibility: visible\9;
   /* Target only IE7 and IE8 with this hack */
   opacity: 0.99;
+}
+
+.channel_name{
+  left: 0;
+  padding-left: 500px;
+  top: 0;
 }

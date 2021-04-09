@@ -91,8 +91,6 @@ exports.claim_list = async function claim_list()
 
 exports.received_mails = async function received_mails(channelCID) 
 {
-	// https://open.lbry.com/@mlibre-mail-test:b/mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9:6
-	// https://open.lbry.com/@mlibre-mail-test:b/mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9-0:4
 	const data = {
 		"method":"resolve",
 		"params":{
@@ -112,12 +110,11 @@ exports.received_mails = async function received_mails(channelCID)
 
 exports.received_mails_2 = async function received_mails_2(channelCID) 
 {
-	// https://open.lbry.com/@mlibre-mail-test:b/mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9:6
 	// https://open.lbry.com/@mlibre-mail-test:b/mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9-0:4
 	const data = {
 		"method":"claim_search",
 		"params":{
-			"text": "mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9-*",
+			"text": `mail-to-${channelCID}-*`,
 			"claim_type": "stream",
 			"claim_ids":[
 				
