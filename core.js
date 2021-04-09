@@ -1,3 +1,4 @@
+const util = require("util");
 const methods = require("./methods");
 
 (async () => 
@@ -25,7 +26,7 @@ const methods = require("./methods");
 		// });
 
 		const mails = await methods.received_mails_2();
-		console.log(mails);
+		log(mails);
 			
 		
 		// const claim_list = await methods.claim_list();

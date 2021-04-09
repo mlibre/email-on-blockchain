@@ -1,6 +1,11 @@
 const axios = require("axios");
 const config = require("./config.json");
 
+log = function(obj) 
+{
+	console.log(util.inspect(obj, false, null, true /* enable colors */));
+};
+
 exports.wallet_list = async function() 
 {
 	const data = {
