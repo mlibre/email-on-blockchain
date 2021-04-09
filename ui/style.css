@@ -816,8 +816,12 @@ a:hover {
   opacity: 0.99;
 }
 
-.channel_name{
+.channel_name {
   left: 0;
   padding-left: 500px;
   top: 0;
+}
+
+body.show-message .date {
+  display: none;
 }

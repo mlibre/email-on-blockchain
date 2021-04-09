@@ -28,6 +28,9 @@ npm start
 
 https://www.electronjs.org/docs/tutorial/quick-start
 
+# tips
+suport does not keeo abidnadend claims. only re saving works
+
 
 @mlibre:e/eob-mail-to-marshal
 @mlibreEmails/eob-mail-to-marshal

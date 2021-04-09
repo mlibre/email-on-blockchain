@@ -4,30 +4,12 @@ window.$ = window.jQuery = require("jquery");
 var cols = {};
 var messageIsOpen = false;
 
-$(document).ready(async function($) 
+$(document).ready(async function($)
 {
-	let total_email_count = 0;
-	const channels_by_cid = {};
-	const channels = await ipcRenderer.invoke("channels", ...[]);
-	channels.forEach(async (channel, index) =>
+	updating_page(); 
+	$("#refresh").click(function (e) 
 	{
-		console.log(channel.name);
-		channels_by_cid[channel.claim_id] = channel;
-		$("#channels").prepend(a_channel_element(channel.name , channel.claim_id));
-
-		const mails = await ipcRenderer.invoke("mails", channel.claim_id);
-		mails.items.forEach((mail,index2) =>
-		{
-			total_email_count++;
-			$("#message-list").prepend(a_mail_element(
-				mail.signing_channel.name,
-				mail.value.title,
-				channels_by_cid[mail.name.match(/mail-to-(.*)-\d/)[1]].name,
-				`chk${index + index2 + 1}`,
-				new Date(mail.timestamp*1000).toLocaleString()
-			));
-			$("#inbox_messages_count").text(` (${total_email_count})`);
-		});
+		updating_page();
 	});
 
 	cols.showOverlay = function() 
@@ -38,7 +20,6 @@ $(document).ready(async function($)
 	{
 		$("body").removeClass("show-main-overlay");
 	};
-
 
 	cols.showMessage = function() 
 	{
@@ -51,7 +32,6 @@ $(document).ready(async function($)
 		$("#main .message-list li").removeClass("active");
 		messageIsOpen = false;
 	};
-
 
 	cols.showSidebar = function() 
 	{
@@ -77,7 +57,6 @@ $(document).ready(async function($)
 });
 
 // Show sidebar when trigger is clicked
-
 $(document).on("click", ".trigger-toggle-sidebar", function() 
 {
 	cols.showSidebar();
@@ -91,7 +70,6 @@ $(document).on("click", ".trigger-message-close", function()
 });
 
 // When you click on a message, show it
-
 $(document).on("click", "#main .message-list li", function(e) 
 {
 	var item = $(this);
@@ -130,14 +108,12 @@ $(document).on("click", "#main .message-list li", function(e)
 });
 
 // This will prevent click from triggering twice when clicking checkbox/label
-
 $(document).on("click", "input[type=checkbox]", function(e) 
 {
 	e.stopImmediatePropagation();
 });
 
 // When you click the overlay, close everything
-
 $(document).on("click", "#main > .overlay", function() 
 {
 	cols.hideOverlay();
@@ -146,11 +122,39 @@ $(document).on("click", "#main > .overlay", function()
 });
 
 // Disable links
-
 $(document).on("click", "a", function(e) 
 {
 	e.preventDefault();
 });
+
+async function updating_page() 
+{
+	let total_email_count = 0;
+	const channels_by_cid = {};
+	const channels = await ipcRenderer.invoke("channels", ...[]);
+	$("#message-list").empty();
+	$("#channels").empty();
+	channels.forEach(async (channel, index) =>
+	{
+		console.log(channel.name);
+		channels_by_cid[channel.claim_id] = channel;
+		$("#channels").prepend(a_channel_element(channel.name , channel.claim_id));
+
+		const mails = await ipcRenderer.invoke("mails", channel.claim_id);
+		mails.items.forEach((mail,index2) =>
+		{
+			total_email_count++;
+			$("#message-list").prepend(a_mail_element(
+				mail.signing_channel.name,
+				mail.value.title,
+				channels_by_cid[mail.name.match(/mail-to-(.*)-\d/)[1]].name,
+				`chk${index + index2 + 1}`,
+				new Date(mail.timestamp*1000).toLocaleString()
+			));
+			$("#inbox_messages_count").text(` (${total_email_count})`);
+		});
+	});
+}
 
 function a_mail_element(sender, title, cname, id, date) 
 {

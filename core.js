@@ -16,8 +16,8 @@ const methods = require("./methods");
 		// const accounts = await methods.accounts();
 		// console.log(accounts);
 
-		const channels = await methods.channels();
-		// console.log(channels);
+		// const channels = await methods.channels();
+		// log(channels);
 
 		// channels.forEach(async channel => 
 		// {
@@ -25,13 +25,13 @@ const methods = require("./methods");
 		// 	console.log(mails);
 		// });
 
-		const mails = await methods.received_mails_2();
-		log(mails);
-			
+		// const mails = await methods.received_mails_2();
+		// log(mails);
 		
 		// const claim_list = await methods.claim_list();
-		// console.log(claim_list);
+		// log(claim_list);
 
-		
+		const claim = await methods.claim_info("mail-to-22f0a1bae4c51f06adc5513edbc3888694f0bbf2-2");
+		log(claim);
 	});
 })();
