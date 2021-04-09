@@ -1206,6 +1206,6 @@ $(document).ready(function($)
 		});
 	};
 	$.fn.nanoScroller.Constructor = NanoScroll;
-})(jQuery, window, document);
+})($, window, document);
 
 //# sourceMappingURL=jquery.nanoscroller.js.map
