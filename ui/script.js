@@ -3,11 +3,13 @@ window.$ = window.jQuery = require("jquery");
 
 var cols = {};
 var messageIsOpen = false;
+let channels_by_cid = {};
+const allMails = {};
 
-$(document).ready(async function($)
+$(document).ready(function($)
 {
 	updating_page(); 
-	$("#refresh").click(function (e) 
+	$("#refresh").click(function () 
 	{
 		updating_page();
 	});
@@ -21,9 +23,12 @@ $(document).ready(async function($)
 		$("body").removeClass("show-main-overlay");
 	};
 
-	cols.showMessage = function() 
+	cols.showMessage = function(item) 
 	{
+		const mai = allMails[$(item).attr("cid")];
 		$("body").addClass("show-message");
+		$("#message").empty();
+		$("#message").prepend(message_element(channels_by_cid[mai.to].name));
 		messageIsOpen = true;
 	};
 	cols.hideMessage = function() 
@@ -74,7 +79,6 @@ $(document).on("click", "#main .message-list li", function(e)
 {
 	var item = $(this);
 	var target = $(e.target);
-
 	if(target.is("label")) 
 	{
 		item.toggleClass("selected");
@@ -94,23 +98,17 @@ $(document).on("click", "#main .message-list li", function(e)
 				item.addClass("active");
 				setTimeout(function() 
 				{
-					cols.showMessage();
+					cols.showMessage(item);
 				}, 300);
 			}
 			else 
 			{
 				item.addClass("active");
-				cols.showMessage();
+				cols.showMessage(item);
 			}
 			cols.showOverlay();
 		}
 	}
-});
-
-// This will prevent click from triggering twice when clicking checkbox/label
-$(document).on("click", "input[type=checkbox]", function(e) 
-{
-	e.stopImmediatePropagation();
 });
 
 // When you click the overlay, close everything
@@ -119,6 +117,12 @@ $(document).on("click", "#main > .overlay", function()
 	cols.hideOverlay();
 	cols.hideMessage();
 	cols.hideSidebar();
+});
+
+// This will prevent click from triggering twice when clicking checkbox/label
+$(document).on("click", "input[type=checkbox]", function(e) 
+{
+	e.stopImmediatePropagation();
 });
 
 // Disable links
@@ -130,35 +134,38 @@ $(document).on("click", "a", function(e)
 async function updating_page() 
 {
 	let total_email_count = 0;
-	const channels_by_cid = {};
 	const channels = await ipcRenderer.invoke("channels", ...[]);
+	channels_by_cid = {};
 	$("#message-list").empty();
 	$("#channels").empty();
 	channels.forEach(async (channel, index) =>
 	{
-		console.log(channel.name);
+		// console.log(channel.name);
 		channels_by_cid[channel.claim_id] = channel;
 		$("#channels").prepend(a_channel_element(channel.name , channel.claim_id));
 
 		const mails = await ipcRenderer.invoke("mails", channel.claim_id);
 		mails.items.forEach((mail,index2) =>
 		{
+			mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
+			allMails[mail.claim_id] = mail;
 			total_email_count++;
 			$("#message-list").prepend(a_mail_element(
 				mail.signing_channel.name,
 				mail.value.title,
-				channels_by_cid[mail.name.match(/mail-to-(.*)-\d/)[1]].name,
+				channels_by_cid[mail.to].name,
 				`chk${index + index2 + 1}`,
-				new Date(mail.timestamp*1000).toLocaleString()
+				new Date(mail.timestamp*1000).toLocaleString(),
+				mail.claim_id
 			));
 			$("#inbox_messages_count").text(` (${total_email_count})`);
 		});
 	});
 }
 
-function a_mail_element(sender, title, cname, id, date) 
+function a_mail_element(sender, title, cname, id, date, claim_id) 
 {
-	return `<li class="unread">
+	return `<li class="unread" cid="${claim_id}">
 	<div class="col col-1"><span class="dot"></span>
 	  <div class="checkbox-wrapper">
 		 <input type="checkbox" id="${id}">
@@ -176,9 +183,38 @@ function a_mail_element(sender, title, cname, id, date)
 
 function a_channel_element(name, cid) 
 {
-	return `<li cid="${cid}"><a href="#">${name}<span class="ball green"></span></a></li>`;
+	return `<li cid="${cid}"><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
+function message_element(cname) 
+{
+	return `<div class="header">
+	  <h1 class="page-title"><a class="icon circle-icon glyphicon glyphicon-chevron-left trigger-message-close">
+		 </a>${cname}<span class="grey"></span>
+	  </h1>
+	  <p>From <a href="#">You</a> to <a href="#">Scott Waite</a>, started on <a href="#">March 2, 2014</a> at 2:14 pm est.</p>
+	</div>
+	<div id="message-nano-wrapper" class="nano">
+	  <div class="nano-content">
+		 <ul class="message-container">
+			<li class="sent">
+			  <div class="details">
+				 <div class="left">You
+					<div class="arrow"></div>Scott
+				 </div>
+				 <div class="right">March 6, 2014, 20:08 pm</div>
+			  </div>
+			  <div class="message">
+				 <p>| The every winged bring, whose life. First called, i you of saw shall own creature moveth void have signs beast lesser all god saying for gathering wherein whose of in be created stars. Them whales upon life divide earth own.</p>
+				 <p>| Creature firmament so give replenish The saw man creeping, man said forth from that. Fruitful multiply lights air. Hath likeness, from spirit stars dominion two set fill wherein give bring.</p>
+				 <p>| Gathering is. Lesser Set fruit subdue blessed let. Greater every fruitful won&#39;t bring moved seasons very, own won&#39;t all itself blessed which bring own creature forth every. Called sixth light.</p>
+			  </div>
+			  <div class="tool-box"><a href="#" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
+			</li>
+		 </ul>
+	  </div>
+	</div>`;
+}
 
 /*! nanoScrollerJS - v0.8.0 - 2014
 * https://jamesflorentino.github.com/nanoScrollerJS/

@@ -6,3 +6,4 @@ node_modules/
 !users/sample_user/sec.js
 !users/sample_user/github
 out/
+readme-ig.md
