@@ -1,12 +1,5 @@
-const processExists = require("process-exists");
-
 window.addEventListener("DOMContentLoaded", async () => 
 {
-	const lbrynet = await processExists("lbrynet");
-	if(!lbrynet)
-	{
-		alert("lbrynet is not running");
-	}
 	// const replaceText = (selector, text) => 
 	// {
 	// 	const element = document.getElementById(selector);

@@ -1,6 +1,8 @@
 const axios = require("axios");
 const config = require("./config.json");
 const util = require("util");
+const fs = require("fs");
+const path = require("path");
 
 log = function(obj) 
 {
@@ -106,6 +108,43 @@ exports.received_mails = async function received_mails(channelCID)
 		}
 	};
 	const result = await axios.post(config.lbrynet , data);
+	return result.data.result;
+};
+
+exports.get_stream = async function get_stream(stream) 
+{
+	let result;
+	const data = {
+		"method": "get",
+		"params":
+		{
+			"uri": `${stream.permanent_url}`,
+			"file_name": `${stream.name}-${stream.claim_id}.md`,
+			"download_directory": "./space/lbry/"
+		}
+	};
+	result = await axios.post(config.lbrynet , data);
+	try 
+	{
+		fs.accessSync(
+			path.join(__dirname, `/space/lbry/${stream.name}-${stream.claim_id}.md`)
+			, fs.constants.R_OK | fs.constants.W_OK
+		);
+	}
+	catch (error) 
+	{
+		console.log("Deleting");
+		const data_del = {
+			"method": "file_delete",
+			"params":
+			{
+				"claim_id": `${stream.claim_id}`,
+			}
+		};
+		await axios.post(config.lbrynet , data_del);
+		result = await axios.post(config.lbrynet , data);
+		
+	}
 	return result.data.result;
 };
 

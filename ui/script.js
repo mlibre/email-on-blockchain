@@ -6,8 +6,13 @@ var messageIsOpen = false;
 let channels_by_cid = {};
 const allMails = {};
 
-$(document).ready(function($)
+$(document).ready(async function($)
 {
+	const lbrynet = await ipcRenderer.invoke("lbrynet");
+	if(!lbrynet)
+	{
+		alert("Please start lbrynet first");
+	}
 	updating_page(); 
 	$("#refresh").click(function () 
 	{
@@ -23,12 +28,20 @@ $(document).ready(function($)
 		$("body").removeClass("show-main-overlay");
 	};
 
-	cols.showMessage = function(item) 
+	cols.showMessage = async function(item) 
 	{
 		const mai = allMails[$(item).attr("cid")];
+		const content = await ipcRenderer.invoke("content", mai);
+		console.log(content);
 		$("body").addClass("show-message");
 		$("#message").empty();
-		$("#message").prepend(message_element(channels_by_cid[mai.to].name));
+		$("#message").prepend(message_element(
+			mai.value.title,
+			mai.signing_channel.name,
+			channels_by_cid[mai.to].name,
+			new Date(mai.timestamp*1000).toLocaleString(),
+			content
+		));
 		messageIsOpen = true;
 	};
 	cols.hideMessage = function() 
@@ -142,7 +155,7 @@ async function updating_page()
 	{
 		// console.log(channel.name);
 		channels_by_cid[channel.claim_id] = channel;
-		$("#channels").prepend(a_channel_element(channel.name , channel.claim_id));
+		$("#channels").prepend(channel_element(channel.name , channel.claim_id));
 
 		const mails = await ipcRenderer.invoke("mails", channel.claim_id);
 		mails.items.forEach((mail,index2) =>
@@ -150,7 +163,7 @@ async function updating_page()
 			mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
 			allMails[mail.claim_id] = mail;
 			total_email_count++;
-			$("#message-list").prepend(a_mail_element(
+			$("#message-list").prepend(mail_element(
 				mail.signing_channel.name,
 				mail.value.title,
 				channels_by_cid[mail.to].name,
@@ -163,7 +176,7 @@ async function updating_page()
 	});
 }
 
-function a_mail_element(sender, title, cname, id, date, claim_id) 
+function mail_element(sender, title, cname, id, date, claim_id) 
 {
 	return `<li class="unread" cid="${claim_id}">
 	<div class="col col-1"><span class="dot"></span>
@@ -181,33 +194,25 @@ function a_mail_element(sender, title, cname, id, date, claim_id)
  </li>`;
 }
 
-function a_channel_element(name, cid) 
+function channel_element(name, cid) 
 {
 	return `<li cid="${cid}"><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
-function message_element(cname) 
+function message_element(cname, from, to, date, content) 
 {
 	return `<div class="header">
 	  <h1 class="page-title"><a class="icon circle-icon glyphicon glyphicon-chevron-left trigger-message-close">
 		 </a>${cname}<span class="grey"></span>
 	  </h1>
-	  <p>From <a href="#">You</a> to <a href="#">Scott Waite</a>, started on <a href="#">March 2, 2014</a> at 2:14 pm est.</p>
+	  <p>From <a href="#">${from}</a> to <a href="#">${to}</a>, on <a href="#">${date}</a></p>
 	</div>
 	<div id="message-nano-wrapper" class="nano">
 	  <div class="nano-content">
 		 <ul class="message-container">
 			<li class="sent">
-			  <div class="details">
-				 <div class="left">You
-					<div class="arrow"></div>Scott
-				 </div>
-				 <div class="right">March 6, 2014, 20:08 pm</div>
-			  </div>
 			  <div class="message">
-				 <p>| The every winged bring, whose life. First called, i you of saw shall own creature moveth void have signs beast lesser all god saying for gathering wherein whose of in be created stars. Them whales upon life divide earth own.</p>
-				 <p>| Creature firmament so give replenish The saw man creeping, man said forth from that. Fruitful multiply lights air. Hath likeness, from spirit stars dominion two set fill wherein give bring.</p>
-				 <p>| Gathering is. Lesser Set fruit subdue blessed let. Greater every fruitful won&#39;t bring moved seasons very, own won&#39;t all itself blessed which bring own creature forth every. Called sixth light.</p>
+				 ${content}
 			  </div>
 			  <div class="tool-box"><a href="#" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
 			</li>
