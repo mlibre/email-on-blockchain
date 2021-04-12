@@ -113,21 +113,12 @@ exports.received_mails = async function received_mails(channelCID)
 
 exports.get_stream = async function get_stream(stream) 
 {
-	let result;
-	const data = {
-		"method": "get",
-		"params":
-		{
-			"uri": `${stream.permanent_url}`,
-			"file_name": `${stream.name}-${stream.claim_id}.md`,
-			"download_directory": "./space/lbry/"
-		}
-	};
-	result = await axios.post(config.lbrynet , data);
+	const download_dir_address = path.join(__dirname, "/space/lbry/");
+	// result = await axios.post(config.lbrynet , data);
 	try 
 	{
 		fs.accessSync(
-			path.join(__dirname, `/space/lbry/${stream.name}-${stream.claim_id}.md`)
+			`${download_dir_address}${stream.name}-${stream.claim_id}.md`
 			, fs.constants.R_OK | fs.constants.W_OK
 		);
 	}
@@ -142,9 +133,17 @@ exports.get_stream = async function get_stream(stream)
 			}
 		};
 		await axios.post(config.lbrynet , data_del);
-		result = await axios.post(config.lbrynet , data);
-		
 	}
+	const data = {
+		"method": "get",
+		"params":
+		{
+			"uri": `${stream.permanent_url}`,
+			"file_name": `${stream.name}-${stream.claim_id}.md`,
+			"download_directory": download_dir_address
+		}
+	};
+	const result = await axios.post(config.lbrynet , data);
 	return result.data.result;
 };
 
