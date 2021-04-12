@@ -5,20 +5,25 @@
   <title>Email Over Blockchain</title>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500" />
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" />
   <link rel="stylesheet" href="./reset/reset.css">
   <link rel="stylesheet" href="./style.css">
-  <!-- <link rel="stylesheet" href="./bootstrap-4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../node_modules/simplemde/dist/simplemde.min.css">
+  <!-- <link href="./fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./bootstrap-4.3.1/css/bootstrap.min.css">
+
   <script src="./bootstrap-4.3.1/js/bootstrap.min.js"></script> -->
-  <!-- <link href="./fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet"> -->
+  <script src="../node_modules/simplemde/dist/simplemde.min.js"></script>
   <script src="./script.js"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
+
 <aside id="sidebar" class="nano">
   <div class="nano-content">
-    <div class="logo-container"><span class="logo glyphicon glyphicon-envelope"></span>EOB</div><a class="compose-button">Compose</a>
+    <div class="logo-container"><span class="logo glyphicon glyphicon-envelope"></span>EOB</div>
+    <a id="compose" class="compose-button">Compose</a>
     <menu class="menu-segment">
       <ul>
         <li class="active"><a href="#">Inbox<span id="inbox_messages_count"></span></a></li>
@@ -72,10 +77,14 @@
           </div>
         </li> -->
 
-      </ul><a href="#" class="load-more-link">Show more messages</a>
     </div>
   </div>
 </main>
+
+<div style="z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
+  <textarea id="compose_text" style="display: none;">
+  </textarea>
+</div>
 
 <div id="message">
  

@@ -5,6 +5,9 @@ const processExists = require("process-exists");
 const path = require("path");
 const fs = require("fs");
 
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "1";
+
 require("electron-reload")(__dirname);
 
 ipcMain.handle("channels", async (event) => 
@@ -61,7 +64,8 @@ function createWindow (width, height)
 			preload: path.join(__dirname, "preload.js"),
 			nodeIntegration: true,
 			contextIsolation: false,
-			enableRemoteModule: true
+			enableRemoteModule: true,
+			allowEval: false
 		}
 	});
 

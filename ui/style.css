@@ -824,3 +824,14 @@ a:hover {
 body.show-message .date {
   display: none;
 }
+
+.editor-toolbar {
+  background-color: lightgrey !important;
+  color: black !important;
+  opacity: 1 !important;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 400px !important;
+	min-width: 700px !important;
+}
