@@ -7,11 +7,10 @@ const fs = require("fs");
 
 require("electron-reload")(__dirname);
 
-ipcMain.handle("channels", async (event, ...args) => 
+ipcMain.handle("channels", async (event) => 
 {
 	const channels = await methods.channels();
 	return channels;
-	// 	const mails = await methods.received_mails(channel.claim_id);
 });
 
 ipcMain.handle("content", async (event, mail) => 
