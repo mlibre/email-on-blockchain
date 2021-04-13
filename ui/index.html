@@ -80,8 +80,19 @@
   </div>
 </main>
 
-<div style="z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
-  <textarea id="compose_text" style="display: none;">
+<div id="compose_text_wrapper"
+  style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
+  z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
+  <div style="padding: 10px; display: inline-block;">
+    To (channel claimID): 
+  </div>
+  <input id="to_claim" type="text"
+    style="border: none; padding: 5px;">
+  </input>
+  <input id="send_mail" type="submit"
+    style="border: none; padding: 5px;">
+  </input>
+  <textarea id="compose_text">
   </textarea>
 </div>
 

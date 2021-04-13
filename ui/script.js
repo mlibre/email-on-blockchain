@@ -138,14 +138,27 @@ $(document).on("click", "a", function(e)
 
 function create_md() 
 {
-	simplemde = new SimpleMDE({ element: $("#compose_text")[0] });
+	destroy_md();
+	simplemde = new SimpleMDE({
+		element: $("#compose_text")[0],
+		autofocus: true,
+		placeholder: "Type here...",
+		hideIcons: ["guide" , "fullscreen"],
+	});
+	$("#compose_text_wrapper").show();
+	cols.showOverlay();
 }
 function destroy_md() 
 {
-	console.log(simplemde.value());
-	const val = simplemde.toTextArea();
-	simplemde = null;
-	$("#compose_text").hide();
+	let val;
+	if(simplemde)
+	{
+		console.log(simplemde.value());
+		val = simplemde.toTextArea();
+		simplemde = null;
+	}
+	$("#compose_text_wrapper").hide();
+	cols.hideOverlay();
 	return val;
 }
 async function update_lbry() 
