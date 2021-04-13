@@ -10,5 +10,5 @@
 npm i
 npm install --dev-only
 npm start
+# npm run make
 ```
-
