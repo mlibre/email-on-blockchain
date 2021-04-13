@@ -1,4 +1,5 @@
 const {ipcRenderer} = require("electron");
+const SimpleMDE = require("simplemde");
 window.$ = window.jQuery = require("jquery");
 
 var cols = {};
@@ -9,15 +10,15 @@ let simplemde;
 
 $(document).ready(async function($)
 {
-	const lbrynet = await ipcRenderer.invoke("lbrynet");
+	const lbrynet = await ipcRenderer.invoke("lbrynet_status");
 	if(!lbrynet)
 	{
-		alert("Run the LBRY desktop application first");
+		alert("lbrynet is not running. Start the LBRY desktop application");
 	}
-	await update_page();
+	await update_lbry();
 	$("#refresh").click(function () 
 	{
-		update_page();
+		update_lbry();
 		destroy_md();
 	});
 	$("#compose").click(function () 
@@ -70,7 +71,6 @@ $(document).ready(async function($)
 	});
 });
 
-// Show sidebar when trigger is clicked
 $(document).on("click", ".trigger-toggle-sidebar", function() 
 {
 	cols.showSidebar();
@@ -83,7 +83,6 @@ $(document).on("click", ".trigger-message-close", function()
 	cols.hideOverlay();
 });
 
-// When you click on a message, show it
 $(document).on("click", "#main .message-list li", function(e) 
 {
 	var item = $(this);
@@ -120,7 +119,6 @@ $(document).on("click", "#main .message-list li", function(e)
 	}
 });
 
-// When you click the overlay, close everything
 $(document).on("click", "#main > .overlay", function() 
 {
 	cols.hideOverlay();
@@ -128,13 +126,11 @@ $(document).on("click", "#main > .overlay", function()
 	cols.hideSidebar();
 });
 
-// This will prevent click from triggering twice when clicking checkbox/label
 $(document).on("click", "input[type=checkbox]", function(e) 
 {
 	e.stopImmediatePropagation();
 });
 
-// Disable links
 $(document).on("click", "a", function(e) 
 {
 	e.preventDefault();
@@ -152,35 +148,42 @@ function destroy_md()
 	$("#compose_text").hide();
 	return val;
 }
-async function update_page() 
+async function update_lbry() 
 {
-	let total_email_count = 0;
-	const channels = await ipcRenderer.invoke("channels", ...[]);
-	channels_by_cid = {};
-	$("#message-list").empty();
-	$("#channels").empty();
-	channels.forEach(async (channel, index) =>
-	{
-		channels_by_cid[channel.claim_id] = channel;
-		$("#channels").prepend(channel_element(channel.name , channel.claim_id));
-
-		const mails = await ipcRenderer.invoke("mails", channel.claim_id);
-		mails.items.forEach((mail,index2) =>
+	try 
+	{	
+		let total_email_count = 0;
+		const channels = await ipcRenderer.invoke("channels", ...[]);
+		channels_by_cid = {};
+		$("#message-list").empty();
+		$("#channels").empty();
+		channels.forEach(async (channel, index) =>
 		{
-			mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
-			allMails[mail.claim_id] = mail;
-			total_email_count++;
-			$("#message-list").prepend(mail_element(
-				mail.signing_channel.name,
-				mail.value.title,
-				channels_by_cid[mail.to].name,
-				`chk${index + index2 + 1}`,
-				new Date(mail.timestamp*1000).toLocaleString(),
-				mail.claim_id
-			));
-			$("#inbox_messages_count").text(` (${total_email_count})`);
+			channels_by_cid[channel.claim_id] = channel;
+			$("#channels").prepend(channel_element(channel.name , channel.claim_id));
+	
+			const mails = await ipcRenderer.invoke("mails", channel.claim_id);
+			mails.items.forEach((mail,index2) =>
+			{
+				mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
+				allMails[mail.claim_id] = mail;
+				total_email_count++;
+				$("#message-list").prepend(mail_element(
+					mail.signing_channel.name,
+					mail.value.title,
+					channels_by_cid[mail.to].name,
+					`chk${index + index2 + 1}`,
+					new Date(mail.timestamp*1000).toLocaleString(),
+					mail.claim_id
+				));
+				$("#inbox_messages_count").text(` (${total_email_count})`);
+			});
 		});
-	});
+	}
+	catch (error) 
+	{
+		console.log(error);
+	}
 }
 
 function mail_element(sender, title, cname, id, date, claim_id) 

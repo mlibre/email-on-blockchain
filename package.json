@@ -2,6 +2,9 @@
   "name": "eob",
   "version": "0.1.0",
   "author": "love",
+  "engines": {
+    "node": ">=12"
+  },
   "description": "Email on Blockchain",
   "main": "main.js",
   "scripts": {

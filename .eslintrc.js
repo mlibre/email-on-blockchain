@@ -139,6 +139,16 @@ module.exports = {
 			{
 				"MemberExpression": 0
 			}
+		],
+		"node/no-unpublished-import": [
+			"error", {
+				"allowModules": ["electron" , "electron-reload"]
+			}
+		],
+		"node/no-unpublished-require": [
+			"error", {
+				"allowModules": ["electron" , "electron-reload"]
+			}
 		]
 	}
 };

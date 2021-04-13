@@ -3,10 +3,35 @@ const config = require("./config.json");
 const util = require("util");
 const fs = require("fs");
 const path = require("path");
+const processExists = require("process-exists");
+const { spawn } = require("child_process");
 
 log = function(obj) 
 {
 	console.log(util.inspect(obj, false, null, true /* enable colors */));
+};
+
+exports.start_lbrynet = async function() 
+{
+	const lbrynet = await processExists("lbrynet");
+	if(!lbrynet)
+	{
+		const ls = spawn("lbrynet", ["start"]);
+		ls.stdout.on("data", (data) => 
+		{
+			console.log(`stdout: ${data}`);
+		});
+	
+		ls.stderr.on("data", (data) => 
+		{
+			console.error(`stderr: ${data}`);
+		});
+	
+		ls.on("close", (code) => 
+		{
+			console.log(`child process exited with code ${code}`);
+		});
+	}
 };
 
 exports.wallet_list = async function() 
