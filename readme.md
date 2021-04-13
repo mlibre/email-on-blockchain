@@ -4,6 +4,7 @@
 
 * lbrynet. you can run lbrynet by running lbry desktop application.
 
+![screenshot](screenshot.png)
 
 # Run
 ```bash
