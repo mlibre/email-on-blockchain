@@ -36,7 +36,7 @@ $(document).ready(async function($)
 	cols.showMessage = async function(item) 
 	{
 		const mai = allMails[$(item).attr("cid")];
-		const content = await ipcRenderer.invoke("content", mai);
+		const content = await ipcRenderer.invoke("lbry_content", mai);
 		$("body").addClass("show-message");
 		$("#message").empty();
 		$("#message").prepend(message_element(
@@ -153,7 +153,7 @@ async function update_lbry()
 	try 
 	{	
 		let total_email_count = 0;
-		const channels = await ipcRenderer.invoke("channels", ...[]);
+		const channels = await ipcRenderer.invoke("lbry_channels", ...[]);
 		channels_by_cid = {};
 		$("#message-list").empty();
 		$("#channels").empty();
@@ -162,7 +162,7 @@ async function update_lbry()
 			channels_by_cid[channel.claim_id] = channel;
 			$("#channels").prepend(channel_element(channel.name , channel.claim_id));
 	
-			const mails = await ipcRenderer.invoke("mails", channel.claim_id);
+			const mails = await ipcRenderer.invoke("lbry_mails", channel.claim_id);
 			mails.items.forEach((mail,index2) =>
 			{
 				mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];

@@ -4,13 +4,13 @@ const processExists = require("process-exists");
 var showdown  = require("showdown");
 const methods = require("./methods");
 
-ipcMain.handle("channels", async (event) => 
+ipcMain.handle("lbry_channels", async (event) => 
 {
 	const channels = await methods.channels();
 	return channels;
 });
 
-ipcMain.handle("content", async (event, mail) => 
+ipcMain.handle("lbry_content", async (event, mail) => 
 {
 	const result = await methods.get_stream(mail);
 	const html = await fs.readFileSync(result.download_path, "utf8");
@@ -19,7 +19,7 @@ ipcMain.handle("content", async (event, mail) =>
 	return converter.makeHtml(text);
 });
 
-ipcMain.handle("mails", async (event, cid) => 
+ipcMain.handle("lbry_mails", async (event, cid) => 
 {
 	const mails = await methods.received_mails_2(cid);
 	return mails;
