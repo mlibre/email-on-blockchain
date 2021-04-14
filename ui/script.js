@@ -19,11 +19,30 @@ $(document).ready(async function($)
 	$("#refresh").click(function () 
 	{
 		update_lbry();
-		destroy_md();
 	});
 	$("#compose").click(function () 
 	{
 		create_md();
+	});
+	$("#cancel_mail").click(function () 
+	{
+		destroy_md();
+	});
+	$("#send_mail").click(async function () 
+	{
+		const info = {
+			content: {
+				title: "Subject",
+				text: "# hi"
+			},
+			from:	{
+				claim_id : "545",
+				name: "binance"
+			},
+			to: "43545435435"
+		};
+		// const content = await ipcRenderer.invoke("lbrynet_publish", info);
+		destroy_md();
 	});
 	cols.showOverlay = function() 
 	{
@@ -219,7 +238,7 @@ function mail_element(sender, title, cname, id, date, claim_id)
 
 function channel_element(name, cid) 
 {
-	return `<li cid="${cid}"><a href="#">${name}<span class="ball blue"></span></a></li>`;
+	return `<li cid="${cid}" cname="${name}"><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
 function message_element(cname, from, to, date, content) 

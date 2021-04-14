@@ -1,16 +1,18 @@
 const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
-const fs = require("fs");
+const mkdir = require("mkdirplz");
+const config = require("./config.json");
+
 require("./ipcs");
 
 require("electron-reload")(__dirname);
 
-function createWindow (width, height) 
+async function createWindow (width, height) 
 {
 	try 
 	{
-		fs.mkdirSync("./space");
-		fs.mkdirSync("./space/lbry");
+		await mkdir(`.${config.lbry.inbox}`);
+		await mkdir(`.${config.lbry.sent}`);
 	}
 	catch {}
 	// Menu.setApplicationMenu(null);

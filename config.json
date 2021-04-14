@@ -1,3 +1,9 @@
 {
-	"lbrynet": "http://localhost:5279/"
+	"lbry": {
+		"lbrynet": "http://localhost:5279/",
+		"space": "/space/lbry/",
+		"inbox": "/space/lbry/inbox/",
+		"sent": "/space/lbry/sent/",
+		"draft": "/space/lbry/draft/"
+	}
 }

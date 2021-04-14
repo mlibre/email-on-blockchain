@@ -16,7 +16,9 @@
     "axios": "^0.21.1",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.6.0",
+    "mkdirplz": "^1.0.2",
     "process-exists": "^4.0.0",
+    "random": "^3.0.5",
     "showdown": "^1.9.1",
     "simplemde": "^1.11.2"
   },

@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const processExists = require("process-exists");
 const { spawn } = require("child_process");
+const random = require("random");
 
 log = function(obj) 
 {
@@ -40,7 +41,7 @@ exports.wallet_list = async function()
 		method: "wallet_list",
 		params: {}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result.items;
 };
 
@@ -52,7 +53,7 @@ exports.wallet_status = async function(wid)
 			wallet_id: wid
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
@@ -64,7 +65,7 @@ exports.wallet_balance = async function(wid)
 			wallet_id: wid
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
@@ -77,7 +78,7 @@ exports.accounts = async function accounts()
 			show_seed: true,
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
@@ -94,7 +95,7 @@ exports.channels = async function channels()
 				"no_totals": false
 			}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result.items;
 };
 
@@ -113,11 +114,11 @@ exports.claim_list = async function claim_list()
 			"include_received_tips": false
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
-exports.received_mails = async function received_mails(channelCID) 
+exports.resolve = async function resolve(channelCID) 
 {
 	const data = {
 		"method":"resolve",
@@ -132,14 +133,14 @@ exports.received_mails = async function received_mails(channelCID)
 			"include_received_tips":false
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
 exports.get_stream = async function get_stream(stream) 
 {
-	const download_dir_address = path.join(__dirname, "/space/lbry/");
-	// result = await axios.post(config.lbrynet , data);
+	const download_dir_address = path.join(__dirname, config.lbry.inbox);
+	// result = await axios.post(config.lbry.lbrynet , data);
 	try 
 	{
 		fs.accessSync(
@@ -157,7 +158,7 @@ exports.get_stream = async function get_stream(stream)
 				"claim_id": `${stream.claim_id}`,
 			}
 		};
-		await axios.post(config.lbrynet , data_del);
+		await axios.post(config.lbry.lbrynet , data_del);
 	}
 	const data = {
 		"method": "get",
@@ -168,11 +169,11 @@ exports.get_stream = async function get_stream(stream)
 			"download_directory": download_dir_address
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
-exports.received_mails_2 = async function received_mails_2(channelCID) 
+exports.received_mails = async function received_mails(channelCID) 
 {
 	// https://open.lbry.com/@mlibre-mail-test:b/mail-to-e2b347558eec20aee84bf4657efa3832bb5a4ab9-0:4
 	const data = {
@@ -236,7 +237,7 @@ exports.received_mails_2 = async function received_mails_2(channelCID)
 			"has_no_source":false
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
@@ -303,13 +304,44 @@ exports.claim_info = async function claim_info(cid)
 			"has_no_source":false
 		}
 	};
-	const result = await axios.post(config.lbrynet , data);
+	const result = await axios.post(config.lbry.lbrynet , data);
 	return result.data.result;
 };
 
-
-async function publish(params) 
+exports.publish = async function publish(content, ownerCH, toCID) 
 {
-	const data = "{\"method\": \"publish\", \"params\": {\"name\": \"a-new-stream\", \"bid\": \"1.0\", \"file_path\": \"/tmp/tmpbduedakt\", \"validate_file\": false, \"optimize_file\": false, \"tags\": [], \"languages\": [], \"locations\": [], \"channel_account_id\": [], \"funding_account_ids\": [], \"preview\": false, \"blocking\": false}}";
-	await axios.post(config.lbrynet , );
-}
+	const name = `mail-to-${toCID}-${random.int(100, 200)}`;
+	const draft_address = `${path.join(__dirname, config.lbry.draft)}${name}.md`;
+
+	fs.writeFileSync(draft_address, content.text);
+	const data = {
+		"method": "publish",
+		"params":
+		{
+			name,
+			title: content.title,
+			"bid": "0.1", 
+			"file_path": draft_address,
+			"validate_file": false,
+			"optimize_file": false,
+			"tags": [],
+			"languages": [],
+			"locations": [],
+			"channel_account_id": [],
+			"funding_account_ids": [],
+			"channel_id": ownerCH.claim_id,
+			"channel_name": ownerCH.name,
+			"preview": false,
+			"blocking": false
+		}
+	};
+	try 
+	{
+		const result = await axios.post(config.lbry.lbrynet , data);
+		return result.data.result;
+	}
+	catch (error) 
+	{
+		log(error);
+	}
+};

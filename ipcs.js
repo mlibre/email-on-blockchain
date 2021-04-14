@@ -21,7 +21,7 @@ ipcMain.handle("lbry_content", async (event, mail) =>
 
 ipcMain.handle("lbry_mails", async (event, cid) => 
 {
-	const mails = await methods.received_mails_2(cid);
+	const mails = await methods.received_mails(cid);
 	return mails;
 });
 
@@ -34,5 +34,11 @@ ipcMain.handle("lbrynet_status", async (event) =>
 ipcMain.handle("lbrynet_start", async (event) => 
 {
 	const result = await methods.start_lbrynet();
+	return result;
+});
+
+ipcMain.handle("lbrynet_publish", async (event, info) => 
+{
+	const result = await methods.publish(info.content, info.from, info.to);
 	return result;
 });

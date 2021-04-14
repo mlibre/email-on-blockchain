@@ -84,6 +84,12 @@
   style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
   z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
   <div style="padding: 10px; display: inline-block;">
+    From: 
+  </div>
+  <input id="from_channel" type="text"
+    style="border: none; padding: 5px;">
+  </input>
+  <div style="padding: 10px; display: inline-block;">
     To (channel claimID): 
   </div>
   <input id="to_claim" type="text"
@@ -92,6 +98,10 @@
   <input id="send_mail" type="submit"
     style="border: none; padding: 5px;">
   </input>
+  <input id="cancel_mail" type="button" value="cancel"
+    style="border: none; padding: 5px;">
+  </input>
+  
   <textarea id="compose_text">
   </textarea>
 </div>
