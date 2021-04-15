@@ -28,20 +28,21 @@ $(document).ready(async function($)
 	{
 		destroy_md();
 	});
-	$("#send_mail").click(async function () 
+	$("#send_mail").click(async function (e) 
 	{
+		$(e).attr("cid");
 		const info = {
 			content: {
-				title: "Subject",
-				text: "# hi"
+				title: "Title",
+				text: simplemde.value()
 			},
 			from:	{
-				claim_id : "545",
-				name: "binance"
+				claim_id : $("#from_channel").val(),
+				name: channels_by_cid[$("#from_channel").val()].name
 			},
-			to: "43545435435"
+			to: $("#to_claim").val()
 		};
-		// const content = await ipcRenderer.invoke("lbrynet_publish", info);
+		const result = await ipcRenderer.invoke("lbrynet_publish", info);
 		destroy_md();
 	});
 	cols.showOverlay = function() 
