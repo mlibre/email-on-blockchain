@@ -4,8 +4,8 @@ Send and receive emails over blockchain
 
 # Why Blockchain mail anyway?
 1. First of all, YOU are in control. No one can restrict your access nor restrict to receive a mail
-2. Finally No spam. Sending email over blockchain cost fee.
-3. Secure by default. blockchain is secure by default as it does not have a single point of failure
+2. Finally no spam. Sending emails over blockchain cost fee.
+3. Secure by default. blockchain is secure by default. cryptography, no single point of failure, ...
 4. It is always there. Your email is always there. no one can delete them nor change them
 5. YOU can only read them. cryptography technology in blockchain make sure you are the only reader of your mails
 
@@ -13,14 +13,16 @@ Send and receive emails over blockchain
 This is a fun project, to demonstrate the possibility of how blockchain email could look like.  
 BUT don't get me wrong :)  
 `EOB` actually works.  
-I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is good enough t show the world how they can implement such a thing.  
+I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is good enough to show the world how they can implement such a thing.  
 There are lots of things that can get improved in this electron app.  
 Feel free to contribute :grinning: 
 
 # How it works
-`EOB` works on the `LBRY` blockchain.  It keeps the mail metadata in the blockchain.  
-Each `LBRY` channel is an account here.  You can send and receive mails to/from channels.  
-Pretty much everything works with claims_id here :)  
+`EOB` works on the `LBRY` blockchain.  
+It keeps the mail metadata in the blockchain.  
+Each `LBRY` channel is an account here.  
+You can send and receive mails to/from channels.  
+Just like `LBRY`, pretty much everything works with `claims_id` here as well :)  
 
 # Screenshots
 ![screenshot](screenshot.png)
