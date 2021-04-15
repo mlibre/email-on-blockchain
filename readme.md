@@ -1,6 +1,6 @@
 # Email Over Blockchain
 Yes! An actual Blockchain mail :green_heart:  
-Send and recive emails over blockchain
+Send and receive emails over blockchain
 
 # Why Blockchain mail anyway?
 1. First of all, YOU are in control. No one can restrict your access nor restrict to receive a mail
