@@ -1,5 +1,6 @@
 # Email Over Blockchain
-Yes! An actual Blockchain mail :green_heart:
+Yes! An actual Blockchain mail :green_heart:  
+Send and recive emails over blockchain
 
 # Why Blockchain mail anyway?
 1. First of all, YOU are in control. No one can restrict your access nor restrict to receive a mail
@@ -11,13 +12,14 @@ Yes! An actual Blockchain mail :green_heart:
 # About EOB (Email Over Blockchain)
 This is a fun project, to demonstrate the possibility of how blockchain email could look like.  
 BUT don't get me wrong :)  
-EOS actually works. I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is good enough t show the world how they can implement such a thing.  
+`EOB` actually works.  
+I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is good enough t show the world how they can implement such a thing.  
 There are lots of things that can get improved in this electron app.  
 Feel free to contribute :grinning: 
 
 # Screenshots
 ![screenshot](screenshot.png)
-![screenshot](screenshot_2.png)
+![screenshot 2](screenshot_2.png)
 
 # Requirments
 * lbrynet. you can run lbrynet by running the `LBRY` desktop application.
@@ -41,5 +43,6 @@ Donate or .... :heartpulse:
 =======
 ETH:
 > 0xc9b64496986E7b6D4A68fDF69eF132A35e91838e
+
 LBC:
 > bSbZzpNRSn6cPpc6nua6S9cCSckH4W72PD
