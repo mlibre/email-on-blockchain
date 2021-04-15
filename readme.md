@@ -17,6 +17,11 @@ I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is 
 There are lots of things that can get improved in this electron app.  
 Feel free to contribute :grinning: 
 
+# How it works
+`EOB` works on the `LBRY` blockchain.  It keeps the mail metadata in the blockchain.  
+Each `LBRY` channel is an account here.  You can send and receive mails to/from channels.  
+Pretty much everything works with claims_id here :)  
+
 # Screenshots
 ![screenshot](screenshot.png)
 ![screenshot 2](screenshot_2.png)
