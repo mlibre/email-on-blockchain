@@ -10,19 +10,20 @@ Send and receive emails over blockchain
 5. YOU can only read them. cryptography technology in blockchain make sure you are the only reader of your mails
 
 # About EOB (Email Over Blockchain)
-This is a fun project, to demonstrate the possibility of how blockchain email could look like.  
+It is a fun project, to demonstrate the possibility of how blockchain email could look like.  
 BUT don't get me wrong :)  
 `EOB` actually works.  
-I wrote it top of `LBRY`.  It is not the best fit for such a service, but it is good enough to show the world how they can implement such a thing.  
-There are lots of things that can get improved in this electron app.  
+I wrote it on top of the `LBRY`.  It is not the best fit for such a service, but it is good enough to start.  
+I may continue this project, and maybe a whole blockchain for it.  
+Lots of things that can get improved in this electron app.  
 Feel free to contribute :grinning: 
 
 # How it works
 `EOB` works on the `LBRY` blockchain.  
-It keeps the mail metadata in the blockchain.  
-Each `LBRY` channel is an account here.  
-You can send and receive mails to/from channels.  
-Just like `LBRY`, pretty much everything works with `claims_id` here as well :)  
+Sending email is creating transaction in the blokcchain, this transaction contains email metadata.  
+So you keeps the mail metadata in the blockchain, and the mail itself in something like `IPFS`.  
+Each `LBRY` channel is an account here. You can send and receive mails to/from channels.  
+Just like `LBRY`, pretty much everything works with `claims id` here as well :)  
 
 # Screenshots
 ![screenshot](screenshot.png)
@@ -38,8 +39,8 @@ git clone https://github.com/mlibre/email-on-blockchain.git
 cd email-on-blockchain
 npm i
 npm install --dev-only
-npm start
 # lbrynet start
+npm start
 # npm run make
 ```
 
