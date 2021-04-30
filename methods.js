@@ -143,10 +143,9 @@ exports.get_stream = async function get_stream(stream)
 	// result = await axios.post(config.lbry.lbrynet , data);
 	try 
 	{
-		fs.accessSync(
-			`${download_dir_address}${stream.name}-${stream.claim_id}.md`
-			, fs.constants.R_OK | fs.constants.W_OK
-		);
+		const file_path = `${download_dir_address}${stream.name}-${stream.claim_id}.md`;
+		fs.accessSync(file_path, fs.constants.R_OK | fs.constants.W_OK);
+		return {download_path: file_path};
 	}
 	catch (error) 
 	{
@@ -159,18 +158,18 @@ exports.get_stream = async function get_stream(stream)
 			}
 		};
 		await axios.post(config.lbry.lbrynet , data_del);
+		const data_get = {
+			"method": "get",
+			"params":
+			{
+				"uri": `${stream.permanent_url}`,
+				"file_name": `${stream.name}-${stream.claim_id}.md`,
+				"download_directory": download_dir_address
+			}
+		};
+		const result = await axios.post(config.lbry.lbrynet , data_get);
+		return result.data.result;
 	}
-	const data = {
-		"method": "get",
-		"params":
-		{
-			"uri": `${stream.permanent_url}`,
-			"file_name": `${stream.name}-${stream.claim_id}.md`,
-			"download_directory": download_dir_address
-		}
-	};
-	const result = await axios.post(config.lbry.lbrynet , data);
-	return result.data.result;
 };
 
 exports.received_mails = async function received_mails(channelCID) 

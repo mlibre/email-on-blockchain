@@ -6,22 +6,20 @@
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500" />
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" />
-  <link rel="stylesheet" href="./libraries/reset/reset.css">
+  <!-- <link rel="stylesheet" href="./libraries/reset/reset.css"> -->
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="../node_modules/simplemde/dist/simplemde.min.css">
-  <!-- <link href="./fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./bootstrap-4.3.1/css/bootstrap.min.css">
-
-  <script src="./bootstrap-4.3.1/js/bootstrap.min.js"></script> -->
+  <link href="./libraries/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./libraries/bootstrap-4.3.1/css/bootstrap.min.css">
+  
   <script src="./script.js"></script>
+  <script src="./libraries/bootstrap-4.3.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
 
 <aside id="sidebar" class="nano">
   <div class="nano-content">
-    <div class="logo-container"><span class="logo glyphicon glyphicon-envelope"></span>EOB</div>
+    <div class="logo-container"><span class="fas fa-envelope logo"></span></span>EOB</div>
     <a id="compose" class="compose-button">Compose</a>
     <menu class="menu-segment">
       <ul>
@@ -46,21 +44,64 @@
     <div class="search-box">
       <input placeholder="Search..."><span class="icon glyphicon glyphicon-search"></span>
     </div>
-    <h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Inbox<a><span class="icon glyphicon glyphicon-chevron-down"></span></a></h1>
+    <h1 class="page-title">
+      <a class="sidebar-toggle-btn trigger-toggle-sidebar">
+        <span class="line">
+
+        </span>
+        <span class="line">
+
+        </span>
+        <span class="line">
+
+        </span>
+        <span class="line line-angle1">
+
+        </span>
+        <span class="line line-angle2">
+        </span>
+      </a>
+      <span class="display-4">
+        Inbox
+      </span>
+      <a>
+        <span class="icon glyphicon glyphicon-chevron-down">
+        
+        </span>
+      </a>
+    </h1>
   </header>
   <div class="action-bar">
     <ul>
-      <li><a class="icon circle-icon glyphicon glyphicon-chevron-down"></a></li>
-      <li><a id="refresh" class="icon circle-icon glyphicon glyphicon-refresh"></a></li>
-      <li><a class="icon circle-icon glyphicon glyphicon-share-alt"></a></li>
-      <li><a class="icon circle-icon red glyphicon glyphicon-remove"></a></li>
-      <li><a class="icon circle-icon red glyphicon glyphicon-flag"></a></li>
+      <a id="#refresh">
+        <span class="fa-stack" style="vertical-align: top;">
+          <i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
+          <i class="fas fa-sync fa-stack-1x"></i>
+        </span>
+      </a>
     </ul>
   </div>
   <div id="main-nano-wrapper" class="nano">
     <div class="nano-content">
       <ul id="message-list" class="message-list">
 
+        <div class="col col-1"><span class="dot"></span>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="${id}">
+            <label for="${id}" class="toggle"></label>
+          </div>
+          <p class="title">${sender}</p><span class="star-toggle glyphicon glyphicon-star-empty"></span>
+        </div>
+        <div class="col col-2">
+          <div class="subject">${title}</span></div>
+        </div>
+        <div class="col col-3">
+          <div class="channel_name">${cname}
+        </div>
+        <div class="col col-2">
+          <div class="date">${date}</div>
+        </div>
+        </div>
         <!-- <li class="unread">
           <div class="col col-1"><span class="dot"></span>
             <div class="checkbox-wrapper">

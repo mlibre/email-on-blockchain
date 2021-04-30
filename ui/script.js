@@ -168,6 +168,7 @@ function create_md()
 	$("#compose_text_wrapper").show();
 	cols.showOverlay();
 }
+
 function destroy_md() 
 {
 	let val;
@@ -181,6 +182,7 @@ function destroy_md()
 	cols.hideOverlay();
 	return val;
 }
+
 async function update_lbry() 
 {
 	try 
@@ -221,20 +223,25 @@ async function update_lbry()
 
 function mail_element(sender, title, cname, id, date, claim_id) 
 {
-	return `<li class="unread" cid="${claim_id}">
-	<div class="col col-1"><span class="dot"></span>
-	  <div class="checkbox-wrapper">
-		 <input type="checkbox" id="${id}">
-		 <label for="${id}" class="toggle"></label>
-	  </div>
-	  <p class="title">${sender}</p><span class="star-toggle glyphicon glyphicon-star-empty"></span>
-	</div>
-	<div class="col col-2">
-	  <div class="subject">${title}</span></div>
-	  <div class="channel_name">${cname}</div>
-	  <div class="date">${date}</div>
-	</div>
- </li>`;
+	return `
+	<li class="row unread" cid="${claim_id}">
+		<div class="col-2"><span class="dot"></span>
+		<div class="checkbox-wrapper mr-1">
+			<input type="checkbox" id="${id}">
+			<label for="${id}" class="toggle"></label>
+		</div>
+		<span class="title">${sender}</span><span class="star-toggle glyphicon glyphicon-star-empty"></span>
+		</div>
+		<div class="col-2">
+		<div class="subject">${title}</span></div>
+		</div>
+		<div class="col-2">
+			<div class="channel_name">${cname}</div>
+		</div>
+		<div class="col-2">
+			<div class="date">${date}</div>
+		</div>
+	</li>`;
 }
 
 function channel_element(name, cid) 

@@ -20,9 +20,9 @@ Feel free to contribute :grinning:
 
 # How it works
 `EOB` works on the `LBRY` blockchain.  
-Sending email is creating transaction in the blokcchain, this transaction contains email metadata.  
-So you keeps the mail metadata in the blockchain, and the mail itself in something like `IPFS`.  
-Each `LBRY` channel is an account here. You can send and receive mails to/from channels.  
+Sending an email is creating a transaction in the blockchain, this transaction contains email metadata.  
+So you keep the mail metadata in the blockchain and the mail itself in something like `IPFS`.  
+Each `LBRY` channel is an account here. You can send and receive emails to/from channels.  
 Just like `LBRY`, pretty much everything works with `claims id` here as well :)  
 
 # Screenshots
