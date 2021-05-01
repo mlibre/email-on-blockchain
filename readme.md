@@ -26,8 +26,8 @@ Each `LBRY` channel is an account here. You can send and receive emails to/from 
 Just like `LBRY`, pretty much everything works with `claims id` here as well :)  
 
 # Screenshots
-![screenshot](screenshot.png)
-![screenshot 2](screenshot_2.png)
+![screenshot](./assets/screenshot.png)
+![screenshot 2](./assets/screenshot_2.png)
 
 # Requirments
 * lbrynet. you can run lbrynet by running the `LBRY` desktop application.

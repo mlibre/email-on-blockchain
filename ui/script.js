@@ -234,13 +234,13 @@ function mail_element(sender, title, cname, id, date, claim_id)
 		<div class="col-2 ml-2">
 			<span class="title">${sender}</span>
 		</div>
-		<div class="col-3">
+		<div class="col-4">
 			<div class="subject">${title}</div>
 		</div>
-		<div class="col-2">
+		<div class="col-3">
 			<div class="channel_name">${cname}</div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			<div class="date">${date}</div>
 		</div>
 	</li>`;

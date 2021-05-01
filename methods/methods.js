@@ -1,5 +1,5 @@
 const axios = require("axios");
-const config = require("./config.json");
+const config = require("../config.json");
 const util = require("util");
 const fs = require("fs");
 const path = require("path");

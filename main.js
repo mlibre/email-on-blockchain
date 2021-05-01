@@ -19,7 +19,7 @@ async function createWindow (width, height)
 	const win = new BrowserWindow({
 		width,
 		height,
-		icon: path.join(__dirname, "/ui/logo.png"),
+		icon: path.join(__dirname, "/assets/logo.png"),
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
