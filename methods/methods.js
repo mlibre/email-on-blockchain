@@ -139,7 +139,7 @@ exports.resolve = async function resolve(channelCID)
 
 exports.get_stream = async function get_stream(stream) 
 {
-	const download_dir_address = path.join(__dirname, config.lbry.inbox);
+	const download_dir_address = path.join(__dirname, ".." , config.lbry.inbox);
 	// result = await axios.post(config.lbry.lbrynet , data);
 	try 
 	{
@@ -310,7 +310,7 @@ exports.claim_info = async function claim_info(cid)
 exports.publish = async function publish(content, ownerCH, toCID) 
 {
 	const name = `mail-to-${toCID}-${random.int(100, 200)}`;
-	const draft_address = `${path.join(__dirname, config.lbry.draft)}${name}.md`;
+	const draft_address = `${path.join(__dirname, "..", config.lbry.draft)}${name}.md`;
 
 	fs.writeFileSync(draft_address, content.text);
 	const data = {
