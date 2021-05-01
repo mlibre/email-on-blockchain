@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./libraries/bootstrap-4.3.1/css/bootstrap.min.css">
   
   <script src="./script.js"></script>
+  <script src="./libraries/popper.min.js"></script> -->
   <script src="./libraries/bootstrap-4.3.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
@@ -41,9 +42,17 @@
 <main id="main">
   <div class="overlay"></div>
   <header class="header">
-    <div class="search-box">
-      <input placeholder="Search..."><span class="icon glyphicon glyphicon-search"></span>
+
+    <div id="blockchain" class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Blockchain
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button">LBRY</button>
+      </div>
     </div>
+
+
     <h1 class="page-title">
       <a class="sidebar-toggle-btn trigger-toggle-sidebar">
         <span class="line">
@@ -65,14 +74,11 @@
         Inbox
       </span>
       <a>
-        <span class="icon glyphicon glyphicon-chevron-down">
-        
-        </span>
       </a>
     </h1>
   </header>
   <div class="action-bar">
-    <ul>
+    <ul class="m-0">
       <a id="#refresh">
         <span class="fa-stack" style="vertical-align: top;">
           <i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
@@ -85,23 +91,6 @@
     <div class="nano-content">
       <ul id="message-list" class="message-list">
 
-        <div class="col col-1"><span class="dot"></span>
-          <div class="checkbox-wrapper">
-            <input type="checkbox" id="${id}">
-            <label for="${id}" class="toggle"></label>
-          </div>
-          <p class="title">${sender}</p><span class="star-toggle glyphicon glyphicon-star-empty"></span>
-        </div>
-        <div class="col col-2">
-          <div class="subject">${title}</span></div>
-        </div>
-        <div class="col col-3">
-          <div class="channel_name">${cname}
-        </div>
-        <div class="col col-2">
-          <div class="date">${date}</div>
-        </div>
-        </div>
         <!-- <li class="unread">
           <div class="col col-1"><span class="dot"></span>
             <div class="checkbox-wrapper">

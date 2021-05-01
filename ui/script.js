@@ -225,20 +225,22 @@ function mail_element(sender, title, cname, id, date, claim_id)
 {
 	return `
 	<li class="row unread" cid="${claim_id}">
-		<div class="col-2"><span class="dot"></span>
-		<div class="checkbox-wrapper mr-1">
-			<input type="checkbox" id="${id}">
-			<label for="${id}" class="toggle"></label>
+		<div class="">
+			<div class="checkbox-wrapper">
+				<input type="checkbox" id="${id}">
+				<label for="${id}" class="toggle"></label>
+			</div>
 		</div>
-		<span class="title">${sender}</span><span class="star-toggle glyphicon glyphicon-star-empty"></span>
+		<div class="col-2 ml-2">
+			<span class="title">${sender}</span>
 		</div>
-		<div class="col-2">
-		<div class="subject">${title}</span></div>
+		<div class="col-3">
+			<div class="subject">${title}</div>
 		</div>
 		<div class="col-2">
 			<div class="channel_name">${cname}</div>
 		</div>
-		<div class="col-2">
+		<div class="col-3">
 			<div class="date">${date}</div>
 		</div>
 	</li>`;
