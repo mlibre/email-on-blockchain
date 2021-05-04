@@ -1,12 +1,12 @@
 const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
 const mkdir = require("mkdirplz");
-const common = require("./methods/common");
+const common = require("./lib/common");
 const config = require("./config.json");
 
-require("./methods/lbry/ipcs");
-
 require("electron-reload")(__dirname);
+
+require("./lib/lbry/ipc");
 
 async function createWindow (width, height) 
 {
