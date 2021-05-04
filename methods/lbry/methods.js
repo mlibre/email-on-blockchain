@@ -1,16 +1,10 @@
 const axios = require("axios");
-const config = require("../config.json");
-const util = require("util");
+const config = require("../../config.json");
 const fs = require("fs");
 const path = require("path");
 const processExists = require("process-exists");
 const { spawn } = require("child_process");
 const random = require("random");
-
-log = function(obj) 
-{
-	console.log(util.inspect(obj, false, null, true /* enable colors */));
-};
 
 exports.start_lbrynet = async function() 
 {

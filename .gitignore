@@ -1,10 +1,5 @@
-**/chromData
 node_modules/
-**/ChomeSigned_webrtc
-**/github/
-**/sec.js
-!users/sample_user/sec.js
-!users/sample_user/github
 out/
 readme-ig.md
 space/
+assets/readme-ig.md

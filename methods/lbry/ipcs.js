@@ -2,7 +2,7 @@ const { ipcMain } = require("electron");
 const fs = require("fs");
 const processExists = require("process-exists");
 var showdown  = require("showdown");
-const methods = require("./methods/methods");
+const methods = require("./methods");
 
 ipcMain.handle("lbry_channels", async (event) => 
 {

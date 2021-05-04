@@ -1,9 +1,10 @@
 const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
 const mkdir = require("mkdirplz");
+const common = require("./methods/common");
 const config = require("./config.json");
 
-require("./ipcs");
+require("./methods/lbry/ipcs");
 
 require("electron-reload")(__dirname);
 
@@ -11,8 +12,9 @@ async function createWindow (width, height)
 {
 	try 
 	{
-		await mkdir(`.${config.lbry.inbox}`);
-		await mkdir(`.${config.lbry.sent}`);
+		await mkdir(path.join(__dirname, config.lbry.inbox));
+		await mkdir(path.join(__dirname, config.lbry.sent));
+		await mkdir(path.join(__dirname, config.lbry.draft));
 	}
 	catch {}
 	// Menu.setApplicationMenu(null);
@@ -27,8 +29,7 @@ async function createWindow (width, height)
 			allowEval: false
 		}
 	});
-
-	win.loadFile("./ui/index.html");
+	win.loadFile("./app/index.html");
 }
 
 app.whenReady().then(() => 
