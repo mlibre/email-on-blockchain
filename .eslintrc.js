@@ -6,8 +6,7 @@ module.exports = {
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:node/recommended",
-		"plugin:json/recommended"
+		"plugin:node/recommended"
 	],
 	"parserOptions": {
 		"ecmaVersion": 12
