@@ -259,52 +259,7 @@ a:hover {
 #main .header .page-title {
   display: block;
 }
-#main .header .page-title .sidebar-toggle-btn {
-  width: 0;
-  margin-top: 1px;
-  padding: 11px 0 0 0;
-  float: left;
-  position: relative;
-  display: block;
-  cursor: pointer;
-  transition-duration: 0.3s;
-  transition-delay: 0.5s;
-  opacity: 0;
-  margin-right: 0;
-}
-.show-sidebar #main .header .page-title .sidebar-toggle-btn {
-  transition-delay: 0s;
-}
-#main .header .page-title .sidebar-toggle-btn .line {
-  height: 3px;
-  display: block;
-  background: #888;
-  margin-bottom: 4px;
-  transition-duration: 0.5s;
-  transition-delay: 0.5s;
-}
-.show-sidebar #main .header .page-title .sidebar-toggle-btn .line-angle1 {
-  transform: rotate(-120deg);
-}
-.show-sidebar #main .header .page-title .sidebar-toggle-btn .line-angle2 {
-  transform: rotate(120deg);
-}
-#main .header .page-title .sidebar-toggle-btn .line-angle1 {
-  width: 8px;
-  margin: 0;
-  position: absolute;
-  top: 15px;
-  left: -11px;
-  transform: rotate(-60deg);
-}
-#main .header .page-title .sidebar-toggle-btn .line-angle2 {
-  width: 8px;
-  margin: 0;
-  position: absolute;
-  top: 21px;
-  left: -11px;
-  transform: rotate(60deg);
-}
+
 #main .header .page-title .icon {
   font-size: 15px;
   margin-left: 20px;
@@ -478,6 +433,7 @@ a:hover {
 }
 #message .message-container {
   padding: 0 30px;
+  list-style-type: none;
 }
 #message .message-container li {
   padding: 25px;
@@ -543,30 +499,7 @@ a:hover {
 #message .message-container li .message p:last-child {
   margin-bottom: 0;
 }
-#message .message-container li:hover .tool-box .red-hover {
-  color: #D23B3D;
-  border-color: #D23B3D;
-}
-#message .message-container li:hover .tool-box .red-hover:hover {
-  color: #791C1E;
-  border-color: #791C1E;
-}
-#message .message-container li .tool-box {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border: 0px solid #DDDFE1;
-  border-top-width: 1px;
-  border-left-width: 1px;
-  padding: 8px 10px;
-  transition-duration: 0.3s;
-}
-#message .message-container li .tool-box a {
-  margin-right: 10px;
-}
-#message .message-container li .tool-box a:last-child {
-  margin-right: 0;
-}
+
 .show-message #message {
   transform: none;
 }
@@ -696,4 +629,15 @@ a:hover {
 .CodeMirror, .CodeMirror-scroll {
 	min-height: 400px !important;
 	min-width: 700px !important;
+}
+
+#backToPage
+{
+  cursor: pointer;
+  font-size: 2rem;
+}
+#refresh
+{
+  list-style-type: none;
+  cursor: pointer;
 }

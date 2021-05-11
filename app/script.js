@@ -91,13 +91,7 @@ $(document).ready(async function($)
 	});
 });
 
-$(document).on("click", ".trigger-toggle-sidebar", function() 
-{
-	cols.showSidebar();
-	cols.showOverlay();
-});
-
-$(document).on("click", ".trigger-message-close", function() 
+$(document).on("click", "#backToPage", function() 
 {
 	cols.hideMessage();
 	cols.hideOverlay();
@@ -225,7 +219,7 @@ function mail_element(sender, title, cname, id, date, claim_id)
 {
 	return `
 	<li class="row unread" cid="${claim_id}">
-		<div class="">
+		<div class="ml-2">
 			<div class="checkbox-wrapper">
 				<input type="checkbox" id="${id}">
 				<label for="${id}" class="toggle"></label>
@@ -253,22 +247,28 @@ function channel_element(name, cid)
 
 function message_element(cname, from, to, date, content) 
 {
-	return `<div class="header">
-	  <h1 class="page-title"><a class="icon circle-icon glyphicon glyphicon-chevron-left trigger-message-close">
-		 </a>${cname}<span class="grey"></span>
-	  </h1>
-	  <p>From <a href="#">${from}</a> to <a href="#">${to}</a>, on <a href="#">${date}</a></p>
+	return `
+	<div class="header">
+		<h1 class="page-title">
+			<a id="backToPage">
+				<span class="fa-stack" style="vertical-align: top;">
+					<i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
+					<i class="fas fa-arrow-left fa-stack-1x"></i>
+				</span>
+			</a>
+			${cname}
+		</h1>
+		<p>From <a href="#">${from}</a> to <a href="#">${to}</a>, on <a href="#">${date}</a></p>
 	</div>
 	<div id="message-nano-wrapper" class="nano">
-	  <div class="nano-content">
-		 <ul class="message-container">
-			<li class="sent">
-			  <div class="message">
-				 ${content}
-			  </div>
-			  <div class="tool-box"><a href="#" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="#" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
-			</li>
-		 </ul>
-	  </div>
+		<div class="nano-content">
+			<ul class="message-container">
+				<li class="sent">
+					<div class="message">
+						${content}
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>`;
 }

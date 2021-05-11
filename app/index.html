@@ -14,26 +14,24 @@
   <link rel="stylesheet" href="./libraries/bootstrap-4.3.1/css/bootstrap.min.css">
 
   <script src="./script.js"></script>
-  <script src="./libraries/popper.min.js"></script> -->
-  <script src="./libraries/bootstrap-4.3.1/js/bootstrap.min.js"></script> -->
+  <script src="./libraries/popper.min.js"></script>
+  <script src="./libraries/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
   <aside id="sidebar" class="nano">
     <div class="nano-content">
-      <div class="logo-container"><span class="fas fa-envelope logo"></span></span>EOB</div>
+      <div class="logo-container"><span class="fas fa-envelope logo"></span>EOB</div>
       <a id="compose" class="compose-button">Compose</a>
-      <menu class="menu-segment">
-        <ul>
-          <li class="active">
-            <a href="#">Inbox<span id="inbox_messages_count"></span></a>
-          </li>
-          <li><a href="#">Sent</a></li>
-          <li><a href="#">Drafts</a></li>
-          <li><a href="#">Trash</a></li>
-        </ul>
-      </menu>
+      <ul class="menu-segment">
+        <li class="active">
+          <a href="#">Inbox<span id="inbox_messages_count"></span></a>
+        </li>
+        <li><a href="#">Sent</a></li>
+        <li><a href="#">Drafts</a></li>
+        <li><a href="#">Trash</a></li>
+      </ul>
       <div class="separator"></div>
       <div class="menu-segment">
         <ul id="channels" class="labels">
@@ -55,61 +53,21 @@
           <button class="dropdown-item" type="button">LBRY</button>
         </div>
       </div>
-
-
-      <h1 class="page-title">
-        <a class="sidebar-toggle-btn trigger-toggle-sidebar">
-          <span class="line">
-
-          </span>
-          <span class="line">
-
-          </span>
-          <span class="line">
-
-          </span>
-          <span class="line line-angle1">
-
-          </span>
-          <span class="line line-angle2">
-          </span>
-        </a>
-        <span class="display-4">
-          Inbox
-        </span>
-        <a>
-        </a>
-      </h1>
     </header>
     <div class="action-bar">
       <ul class="m-0">
-        <a id="#refresh">
+        <li id="refresh">
           <span class="fa-stack" style="vertical-align: top;">
             <i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
             <i class="fas fa-sync fa-stack-1x"></i>
           </span>
-        </a>
+        </li>
       </ul>
     </div>
     <div id="main-nano-wrapper" class="nano">
       <div class="nano-content">
         <ul id="message-list" class="message-list">
-
-          <!-- <li class="unread">
-          <div class="col col-1"><span class="dot"></span>
-            <div class="checkbox-wrapper">
-              <input type="checkbox" id="chk1">
-              <label for="chk1" class="toggle"></label>
-            </div>
-            <p class="title">Lucas Kriebel (via Twitter)</p><span class="star-toggle glyphicon glyphicon-star-empty"></span>
-          </div>
-          <div class="col col-2">
-            <div class="subject">Lucas Krie o</div>
-            <div class="channel_name">11:dadasd am</div>
-            <div class="date">11:49 am</div>
-          </div>
-        </li> -->
-
+        </ul>
       </div>
     </div>
   </main>
@@ -119,18 +77,13 @@
     <div style="padding: 10px; display: inline-block;">
       From:
     </div>
-    <input id="from_channel" type="text" style="border: none; padding: 5px;">
-    </input>
+    <input id="from_channel" type="text" style="border: none; padding: 5px;" />
     <div style="padding: 10px; display: inline-block;">
       To (channel claimID):
     </div>
-    <input id="to_claim" type="text" style="border: none; padding: 5px;">
-    </input>
-    <input id="send_mail" type="submit" style="border: none; padding: 5px;">
-    </input>
-    <input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;">
-    </input>
-
+    <input id="to_claim" type="text" style="border: none; padding: 5px;" />
+    <input id="send_mail" type="submit" style="border: none; padding: 5px;" />
+    <input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;" />
     <textarea id="compose_text">
   </textarea>
   </div>

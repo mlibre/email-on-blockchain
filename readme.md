@@ -1,5 +1,5 @@
 # Email Over Blockchain
-Yes! An actual Blockchain mail :green_heart:  
+Yes! an actual Blockchain Mail app :green_heart:  
 Send and receive emails over blockchain
 
 # Why Blockchain mail anyway?
