@@ -1,13 +1,22 @@
 {
   "name": "eob",
-  "version": "0.1.0",
+  "version": "0.8.0",
   "author": "love",
+  "keywords": [
+    "blockchain",
+    "email",
+    "app",
+    "electron"
+  ],
   "engines": {
     "node": ">=12"
   },
-  "description": "Email on Blockchain",
+  "license": "GPLV3",
+  "description": "Blockchain Email",
   "main": "main.js",
+  "bin": "cli.js",
   "scripts": {
+    "estart": "electron .",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
