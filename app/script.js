@@ -13,7 +13,7 @@ $(document).ready(async function($)
 	const lbrynet = await ipcRenderer.invoke("lbrynet_status");
 	if(!lbrynet)
 	{
-		alert("lbrynet is not running. Start the LBRY desktop application");
+		alert("lbrynet is not running. Start the LBRY desktop application and use the refresh button");
 	}
 	await update_lbry();
 	$("#refresh").click(function () 
