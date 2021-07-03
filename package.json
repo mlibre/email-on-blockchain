@@ -9,7 +9,7 @@
     "electron"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=13"
   },
   "license": "GPLV3",
   "description": "Blockchain Email",

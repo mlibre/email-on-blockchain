@@ -45,7 +45,7 @@ npm start
 ```
 
 # LICENSE
-GPLV3
+GPLV3 & LICENSE File
 
 Donate or .... :heartpulse:
 =======

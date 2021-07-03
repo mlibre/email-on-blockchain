@@ -166,6 +166,17 @@ a:hover {
 #sidebar .menu-segment li.title .icon {
   float: right;
 }
+
+#sidebar .menu-segment div.title {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 0;
+  color: #9ca9bd;
+}
+#sidebar .menu-segment div.title .icon {
+  float: right;
+}
+
 #sidebar .menu-segment li.active a,
 #sidebar .menu-segment li.active a:hover {
   background: #282d36;
@@ -201,6 +212,7 @@ a:hover {
 #sidebar .menu-segment .chat.labels li a span {
   float: right;
 }
+
 #sidebar .menu-segment .labels.chat li a span,
 #sidebar .menu-segment .chat.chat li a span {
   float: left;
@@ -640,4 +652,9 @@ a:hover {
 {
   list-style-type: none;
   cursor: pointer;
+}
+#blockchains > li > a > img
+{
+  float: right;
+  width: 1.5rem;
 }

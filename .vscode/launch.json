@@ -11,7 +11,11 @@
 			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
 		 },
 		 "args" : ["."],
-		 "outputCapture": "std"
+		 "outputCapture": "std",
+		 "runtimeArgs": [
+			"--inspect=50000"
+		 ],
+		 "autoAttachChildProcesses": true
 	  }
 	]
  }

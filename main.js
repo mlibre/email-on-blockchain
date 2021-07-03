@@ -1,11 +1,10 @@
 const { app, BrowserWindow, screen, Menu } = require("electron");
 const path = require("path");
 const mkdir = require("mkdirplz");
-const common = require("./lib/common");
 const config = require("./config.json");
+const util = require("util");
 
 require("electron-reload")(__dirname);
-
 require("./lib/lbry/ipc");
 
 async function createWindow (width, height) 
@@ -53,3 +52,8 @@ app.on("window-all-closed", () =>
 		app.quit();
 	}
 });
+
+log = function(obj) 
+{
+	console.log(util.inspect(obj, false, null, true /* enable colors */));
+};

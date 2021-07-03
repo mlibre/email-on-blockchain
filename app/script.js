@@ -8,7 +8,7 @@ let channels_by_cid = {};
 const allMails = {};
 let simplemde;
 
-$(document).ready(async function($)
+$(async function($)
 {
 	const lbrynet = await ipcRenderer.invoke("lbrynet_status");
 	if(!lbrynet)
@@ -16,19 +16,19 @@ $(document).ready(async function($)
 		alert("lbrynet is not running. Start the LBRY desktop application and use the refresh button");
 	}
 	await update_lbry();
-	$("#refresh").click(function () 
+	$("#refresh").on("click" , function () 
 	{
 		update_lbry();
 	});
-	$("#compose").click(function () 
+	$("#compose").on("click", function () 
 	{
 		create_md();
 	});
-	$("#cancel_mail").click(function () 
+	$("#cancel_mail").on("click", function () 
 	{
 		destroy_md();
 	});
-	$("#send_mail").click(async function (e) 
+	$("#send_mail").on("click", async function (e) 
 	{
 		$(e).attr("cid");
 		const info = {

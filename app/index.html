@@ -10,12 +10,13 @@
 
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="../node_modules/simplemde/dist/simplemde.min.css">
-  <link href="./libraries/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./libraries/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link href="./frameworks/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./frameworks/bootstrap-4.3.1/css/bootstrap.min.css">
 
   <script src="./script.js"></script>
-  <script src="./libraries/popper.min.js"></script>
-  <script src="./libraries/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+  <script src="./lib/lbry.js"></script>
+  <script src="./frameworks/popper.min.js"></script>
+  <script src="./frameworks/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -34,7 +35,15 @@
       </ul>
       <div class="separator"></div>
       <div class="menu-segment">
+        <div class="title">Channels <i class="icon fas fa-ellipsis-v"></i></div>
         <ul id="channels" class="labels">
+        </ul>
+      </div>
+      <div class="separator"></div>
+      <div class="menu-segment">
+        <div class="title">Blockchains <i class="icon fas fa-th-large"></i></i></div>
+        <ul id="blockchains" class="labels">
+          <li name="LBRY"><a href="#">LBRY<img class="" src="../assets/lbry.png" alt="lbry"></a></li>
         </ul>
       </div>
       <div class="bottom-padding"></div>
@@ -43,16 +52,6 @@
   <main id="main">
     <div class="overlay"></div>
     <header class="header">
-
-      <div id="blockchain" class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenu2"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Blockchain
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button">LBRY</button>
-        </div>
-      </div>
     </header>
     <div class="action-bar">
       <ul class="m-0">
