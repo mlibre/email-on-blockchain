@@ -26,7 +26,7 @@ async function lbry_update()
 				mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
 				lbry_mails[mail.claim_id] = mail;
 				total_email_count++;
-				$("#message-list").prepend(mail_element(
+				$("#message-list").prepend(lbry_mail_element(
 					mail.signing_channel.name,
 					mail.value.title,
 					channels_by_cid[mail.to].name,
@@ -77,11 +77,11 @@ function lbry_message_element(cname, from, to, date, content)
 	</div>`;
 }
 
-function mail_element(sender, title, cname, id, date, claim_id) 
+function lbry_mail_element(sender, title, cname, id, date, claim_id) 
 {
 	return `
 	<li class="row unread" cid="${claim_id}">
-		<div class="ml-2">
+		<div class="col">
 			<div class="checkbox-wrapper">
 				<input type="checkbox" id="${id}">
 				<label for="${id}" class="toggle"></label>
