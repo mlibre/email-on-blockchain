@@ -1,6 +1,7 @@
-* {
-  box-sizing: border-box;
-}
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('../node_modules/@fortawesome/fontawesome-free/css/all.min.css');
+@import url('../node_modules/simplemde/dist/simplemde.min.css');
+
 body {
   background: #FFF;
   font-family: sans-serif;

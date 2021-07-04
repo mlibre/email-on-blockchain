@@ -7,16 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="../node_modules/simplemde/dist/simplemde.min.css">
-  <link href="./frameworks/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./frameworks/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./frameworks/mmodal/style.css">
 
-  <script src="./script.js"></script>
-  <script src="./lib/lbry.js"></script>
-  <script src="./frameworks/popper.min.js"></script>
-  <script src="./frameworks/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +34,7 @@
       </div>
       <div class="separator"></div>
       <div class="menu-segment">
-        <div class="title">Blockchains <i class="icon fas fa-th-large"></i></i></div>
+        <div class="title">Blockchains<i class="icon fas fa-th-large"></i></i></div>
         <ul id="blockchains" class="labels">
           <li name="LBRY"><a href="#">LBRY<img class="" src="../assets/lbry.png" alt="lbry"></a></li>
         </ul>
@@ -72,7 +65,7 @@
   </main>
 
   <div id="compose_text_wrapper" style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
-  z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
+    z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
     <div style="padding: 10px; display: inline-block;">
       From:
     </div>
@@ -84,13 +77,37 @@
     <input id="send_mail" type="submit" style="border: none; padding: 5px;" />
     <input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;" />
     <textarea id="compose_text">
-  </textarea>
+    </textarea>
   </div>
 
   <div id="message">
 
   </div>
 
+
+  <div class="modal fade" id="MModal" tabindex="-1">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="mmodal_dot" id="mmodal_dot"></div>
+          <div id="mmodal_step_1" class="step"></div>
+          <div id="mmodal_step_2" class="step"></div>
+          <div id="mmodal_step_3" class="step"></div>
+        </div>
+        <div class="modal-footer">
+          <p id="modal_message" style="direction: rtl; margin: 0;">
+            در حال پردازش
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
+
+<script src="./script.js"></script>
+<script src="./lib/lbry.js"></script>
+<script src="./frameworks/mmodal/script.js"></script>
 
 </html>

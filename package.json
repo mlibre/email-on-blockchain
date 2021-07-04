@@ -22,7 +22,10 @@
     "make": "electron-forge make"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
+    "bootstrap": "^5.0.2",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.6.0",
     "mkdirplz": "^1.0.2",

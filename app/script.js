@@ -1,21 +1,18 @@
 const {ipcRenderer} = require("electron");
 const SimpleMDE = require("simplemde");
-window.$ = window.jQuery = require("jquery");
+$ = window.$ = window.jQuery = require("jquery");
+require("@popperjs/core");
+require("bootstrap");
 
 var cols = {};
 var messageIsOpen = false;
-let channels_by_cid = {};
+const channels_by_cid = {};
 const allMails = {};
 let simplemde;
 
 $(async function($)
 {
-	const lbrynet = await ipcRenderer.invoke("lbrynet_status");
-	if(!lbrynet)
-	{
-		alert("lbrynet is not running. Start the LBRY desktop application and use the refresh button");
-	}
-	await update_lbry();
+
 	$("#refresh").on("click" , function () 
 	{
 		update_lbry();
@@ -177,43 +174,6 @@ function destroy_md()
 	return val;
 }
 
-async function update_lbry() 
-{
-	try 
-	{	
-		let total_email_count = 0;
-		const channels = await ipcRenderer.invoke("lbry_channels", ...[]);
-		channels_by_cid = {};
-		$("#message-list").empty();
-		$("#channels").empty();
-		channels.forEach(async (channel, index) =>
-		{
-			channels_by_cid[channel.claim_id] = channel;
-			$("#channels").prepend(channel_element(channel.name , channel.claim_id));
-	
-			const mails = await ipcRenderer.invoke("lbry_mails", channel.claim_id);
-			mails.items.forEach((mail,index2) =>
-			{
-				mail.to = mail.name.match(/mail-to-(.*)-\d/)[1];
-				allMails[mail.claim_id] = mail;
-				total_email_count++;
-				$("#message-list").prepend(mail_element(
-					mail.signing_channel.name,
-					mail.value.title,
-					channels_by_cid[mail.to].name,
-					`chk${index + index2 + 1}`,
-					new Date(mail.timestamp*1000).toLocaleString(),
-					mail.claim_id
-				));
-				$("#inbox_messages_count").text(` (${total_email_count})`);
-			});
-		});
-	}
-	catch (error) 
-	{
-		console.log(error);
-	}
-}
 
 function mail_element(sender, title, cname, id, date, claim_id) 
 {
