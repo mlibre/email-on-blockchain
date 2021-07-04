@@ -18,7 +18,7 @@
     <div class="nano-content">
       <div class="logo-container"><span class="fas fa-envelope logo"></span>EOB</div>
       <a id="compose" class="compose-button">Compose</a>
-      <ul class="menu-segment">
+      <ul class="menu-segment px-5 mx-4">
         <li class="active">
           <a href="#">Inbox<span id="inbox_messages_count"></span></a>
         </li>
@@ -27,15 +27,15 @@
         <li><a href="#">Trash</a></li>
       </ul>
       <div class="separator"></div>
-      <div class="menu-segment">
-        <div class="title">Channels <i class="icon fas fa-ellipsis-v"></i></div>
-        <ul id="channels" class="labels">
+      <div class="menu-segment px-5">
+        <div class="title">Channels<i class="icon fas fa-ellipsis-h"></i></div>
+        <ul id="channels" class="p-0 labels">
         </ul>
       </div>
       <div class="separator"></div>
-      <div class="menu-segment">
+      <div class="menu-segment px-5">
         <div class="title">Blockchains<i class="icon fas fa-th-large"></i></i></div>
-        <ul id="blockchains" class="labels">
+        <ul id="blockchains" class="p-0 labels">
           <li name="LBRY"><a href="#">LBRY<img class="" src="../assets/lbry.png" alt="lbry"></a></li>
         </ul>
       </div>
@@ -43,6 +43,7 @@
     </div>
   </aside>
   <main id="main">
+    <div id="sidebar_bars" class="sr-only"><i class="fas fa-bars"></i></div>
     <div class="overlay"></div>
     <header class="header">
     </header>
@@ -64,6 +65,10 @@
     </div>
   </main>
 
+  <div id="message">
+
+  </div>
+
   <div id="compose_text_wrapper" style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
     z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
     <div style="padding: 10px; display: inline-block;">
@@ -79,11 +84,6 @@
     <textarea id="compose_text">
     </textarea>
   </div>
-
-  <div id="message">
-
-  </div>
-
 
   <div class="modal fade" id="MModal" tabindex="-1">
     <div class="modal-dialog">
