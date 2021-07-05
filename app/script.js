@@ -63,9 +63,10 @@ $("#blockchains li").on("click", async function(event)
 	let bc = $(this).attr("name");
 	if(bc == "LBRY")
 	{
-		if(!await lbry_status())
+		let ls = await lbry_status();
+		if(ls.error)
 		{
-			failMmodal("lbrynet is not running. Start the LBRY desktop application");
+			failMmodal(ls.message);
 			return;
 		}
 		await lbry_update();
