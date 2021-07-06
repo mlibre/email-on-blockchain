@@ -6,7 +6,6 @@ require("@popperjs/core");
 require("bootstrap");
 
 var messageIsOpen = false;
-let channels_by_cid = {};
 let simplemde;
 
 $(function($)
@@ -43,20 +42,7 @@ $("#send_mail").on("click", async function (e)
 	let bc = active_blockchain();
 	if(bc == "LBRY")
 	{
-		$(e).attr("cid");
-		const info = {
-			content: {
-				title: "Title",
-				text: simplemde.value()
-			},
-			from:	{
-				claim_id : $("#from_channel").val(),
-				name: channels_by_cid[$("#from_channel").val()].name
-			},
-			to: $("#to_claim").val()
-		};
-		const result = await ipcRenderer.invoke("lbrynet_publish", info);
-		destroy_md();		
+		await lbry_publish(e);
 	}
 });
 	
@@ -94,6 +80,14 @@ function showOverlay ()
 function hideOverlay () 
 {
 	$("body").removeClass("show-main-overlay");
+	let bc = active_blockchain();
+	if(bc == "LBRY")
+	{
+		if(simplemde != null)
+		{
+			destroy_md()
+		}
+	}
 }
 function hideMessage() 
 {
@@ -138,5 +132,5 @@ $(document).on("click", "a", function(e)
 
 function active_blockchain() 
 {
-	return $("#blockchains li[class=bg-secondary]").attr("name");
+	return $("#blockchains li[class~=bg-secondary]").attr("name");
 }

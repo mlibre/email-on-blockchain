@@ -1,4 +1,5 @@
 const lbry_mails = {}; // transactions information, claimID, ...
+let channels_by_cid = {};
 
 
 async function lbry_status(params) 
@@ -170,11 +171,28 @@ function destroy_md()
 	let val;
 	if (simplemde)
 	{
-		console.log(simplemde.value());
+		// console.log(simplemde.value());
 		val = simplemde.toTextArea();
 		simplemde = null;
 	}
 	$("#compose_text_wrapper").hide();
 	hideOverlay();
 	return val;
+}
+
+async function lbry_publish(e) {
+	$(e).attr("cid");
+	const info = {
+		content: {
+			title: "Title",
+			text: simplemde.value()
+		},
+		from:	{
+			claim_id : $("#from_channel").val(),
+			name: channels_by_cid[$("#from_channel").val()].name
+		},
+		to: $("#to_claim").val()
+	};
+	const result = await ipcRenderer.invoke("lbrynet_publish", info);
+	destroy_md();
 }
