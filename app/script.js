@@ -11,53 +11,55 @@ let simplemde;
 
 $(function($)
 {
-	$("#refresh").on("click" , function () 
-	{
-		let bc = active_blockchain();
-		if(bc == "LBRY")
-		{
-			lbry_update();
-		}
-	});
-	$("#compose").on("click", function () 
-	{
-		let bc = active_blockchain();
-		if(bc == "LBRY")
-		{
-			create_md();
-		}
-	});
-	$("#cancel_mail").on("click", function () 
-	{
-		let bc = active_blockchain();
-		if(bc == "LBRY")
-		{
-			destroy_md();
-		}
-	});
-	$("#send_mail").on("click", async function (e) 
-	{
-		let bc = active_blockchain();
-		if(bc == "LBRY")
-		{
-			$(e).attr("cid");
-			const info = {
-				content: {
-					title: "Title",
-					text: simplemde.value()
-				},
-				from:	{
-					claim_id : $("#from_channel").val(),
-					name: channels_by_cid[$("#from_channel").val()].name
-				},
-				to: $("#to_claim").val()
-			};
-			const result = await ipcRenderer.invoke("lbrynet_publish", info);
-			destroy_md();		
-		}
-	});
+	$("#blockchains li[name=LBRY]").click();
 });
 
+$("#refresh").on("click" , function () 
+{
+	let bc = active_blockchain();
+	if(bc == "LBRY")
+	{
+		lbry_update();
+	}
+});
+$("#compose").on("click", function () 
+{
+	let bc = active_blockchain();
+	if(bc == "LBRY")
+	{
+		create_md();
+	}
+});
+$("#cancel_mail").on("click", function () 
+{
+	let bc = active_blockchain();
+	if(bc == "LBRY")
+	{
+		destroy_md();
+	}
+});
+$("#send_mail").on("click", async function (e) 
+{
+	let bc = active_blockchain();
+	if(bc == "LBRY")
+	{
+		$(e).attr("cid");
+		const info = {
+			content: {
+				title: "Title",
+				text: simplemde.value()
+			},
+			from:	{
+				claim_id : $("#from_channel").val(),
+				name: channels_by_cid[$("#from_channel").val()].name
+			},
+			to: $("#to_claim").val()
+		};
+		const result = await ipcRenderer.invoke("lbrynet_publish", info);
+		destroy_md();		
+	}
+});
+	
 $("#blockchains li").on("click", async function(event) 
 {
 	let bc = $(this).attr("name");
@@ -81,7 +83,7 @@ $(document).on("click", "#main .message-list li", function(e)
 	var target = $(e.target);
 	if(bc == "LBRY")
 	{
-		message_click(item , target);
+		lbry_mail_click(item , target);
 	}
 });
 
