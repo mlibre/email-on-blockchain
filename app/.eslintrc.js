@@ -3,10 +3,15 @@ module.exports = {
 		"browser": true,
 		"es2021": true,
 	},
-	"extends": [
+	"plugins": [
+		"html"
 	],
+	"settings": {
+		"html/xml-extensions": [".html", ".js"],  // consider .html files as XML
+	},
 	"parserOptions": {
 		"ecmaVersion": 12,
+		"sourceType": "module"
 	},
 	"rules": {
 		"indent": ["error", "tab"],
