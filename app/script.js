@@ -51,6 +51,7 @@ $("#blockchains li").on("click", async function(event)
 	let bc = $(this).attr("name");
 	if(bc == "LBRY")
 	{
+		$("[rbc=LBRY]").show();
 		let ls = await lbry_status();
 		if(ls.error)
 		{

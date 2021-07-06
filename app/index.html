@@ -2,107 +2,112 @@
 <html lang="en">
 
 <head>
-  <title>Email Over Blockchain</title>
+	<title>Email Over Blockchain</title>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./frameworks/mmodal/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./frameworks/mmodal/style.css">
 
 </head>
 
 <body>
 
-  <aside id="sidebar" class="nano">
-    <div class="nano-content">
-      <div class="logo-container"><span class="fas fa-envelope logo"></span>EOB</div>
-      <a id="compose" class="compose-button">Compose</a>
-      <ul class="menu-segment px-5 mx-4">
-        <li class="active">
-          <a href="#">Inbox<span id="inbox_messages_count"></span></a>
-        </li>
-        <li><a href="#">Sent</a></li>
-        <li><a href="#">Drafts</a></li>
-        <li><a href="#">Trash</a></li>
-      </ul>
-      <div class="separator"></div>
-      <div class="menu-segment px-5">
-        <div class="title">Channels<i class="icon fas fa-ellipsis-h"></i></div>
-        <ul id="channels" class="p-0 labels">
-        </ul>
-      </div>
-      <div class="separator"></div>
-      <div class="menu-segment px-3">
-        <div class="title p-3">Blockchains<i class="icon fas fa-th-large"></i></i></div>
-        <ul id="blockchains" class="px-1 labels">
-          <li name="LBRY" class="px-3"><a href="#">LBRY<img class="mt-1" src="../assets/lbry.png" alt="lbry"></a></li>
-        </ul>
-      </div>
-      <div class="bottom-padding"></div>
-    </div>
-  </aside>
-  <main id="main">
-    <div id="sidebar_bars" class="sr-only"><i class="fas fa-bars"></i></div>
-    <div class="overlay"></div>
-    <header class="header">
-    </header>
-    <div class="action-bar">
-      <ul class="m-0">
-        <li id="refresh">
-          <span class="fa-stack" style="vertical-align: top;">
-            <i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
-            <i class="fas fa-sync fa-stack-1x"></i>
-          </span>
-        </li>
-      </ul>
-    </div>
-    <div id="main-nano-wrapper" class="nano">
-      <div class="nano-content container-fluid">
-        <ul id="message-list" class="message-list pt-2">
-        </ul>
-      </div>
-    </div>
-  </main>
+	<aside id="sidebar" class="nano">
+		<div class="nano-content">
+			<div class="logo-container"><span class="fas fa-envelope logo"></span>EOB</div>
+			<a id="compose" class="compose-button">Compose</a>
+			<ul class="menu-segment px-5 mx-4">
+				<li class="active">
+					<a href="#">Inbox<span id="inbox_messages_count"></span></a>
+				</li>
+				<li><a href="#">Sent</a></li>
+				<li><a href="#">Drafts</a></li>
+				<li><a href="#">Trash</a></li>
+			</ul>
 
-  <div id="message">
+			<span rbc="LBRY" style="display: none;">
+				<div class="separator"></div>
+				<div class="menu-segment px-5">
+					<div class="title">Channels<i class="icon fas fa-ellipsis-h"></i></div>
+					<ul id="channels" class="p-0 labels">
+					</ul>
+				</div>
+			</span>
 
-  </div>
+			<div class="separator"></div>
+			<div class="menu-segment px-3">
+				<div class="title p-3">Blockchains<i class="icon fas fa-th-large"></i></i></div>
+				<ul id="blockchains" class="px-1 labels">
+					<li name="LBRY" class="px-3"><a href="#">LBRY<img class="mt-1" src="../assets/lbry.png" alt="lbry"></a>
+					</li>
+				</ul>
+			</div>
+			<div class="bottom-padding"></div>
+		</div>
+	</aside>
+	<main id="main">
+		<div id="sidebar_bars" class="sr-only"><i class="fas fa-bars"></i></div>
+		<div class="overlay"></div>
+		<header class="header">
+		</header>
+		<div class="action-bar">
+			<ul class="m-0">
+				<li id="refresh">
+					<span class="fa-stack" style="vertical-align: top;">
+						<i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
+						<i class="fas fa-sync fa-stack-1x"></i>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<div id="main-nano-wrapper" class="nano">
+			<div class="nano-content container-fluid">
+				<ul id="message-list" class="message-list pt-2">
+				</ul>
+			</div>
+		</div>
+	</main>
 
-  <div id="compose_text_wrapper" style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
-    z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
-    <div style="padding: 10px; display: inline-block;">
-      From:
-    </div>
-    <input id="from_channel" type="text" style="border: none; padding: 5px;" />
-    <div style="padding: 10px; display: inline-block;">
-      To (channel claimID):
-    </div>
-    <input id="to_claim" type="text" style="border: none; padding: 5px;" />
-    <input id="send_mail" type="submit" style="border: none; padding: 5px;" />
-    <input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;" />
-    <textarea id="compose_text">
-    </textarea>
-  </div>
+	<div id="message">
 
-  <div class="modal fade" id="MModal" tabindex="-1">
-    <div class="modal-dialog">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="mmodal_dot" id="mmodal_dot"></div>
-          <div id="mmodal_step_1" class="step"></div>
-          <div id="mmodal_step_2" class="step"></div>
-          <div id="mmodal_step_3" class="step"></div>
-        </div>
-        <div class="modal-footer">
-          <p id="modal_message" style="direction: rtl; margin: 0;">
-            در حال پردازش
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+	</div>
+
+	<div id="compose_text_wrapper" style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
+		z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
+		<div style="padding: 10px; display: inline-block;">
+			From:
+		</div>
+		<input id="from_channel" type="text" style="border: none; padding: 5px;" />
+		<div style="padding: 10px; display: inline-block;">
+			To (channel claimID):
+		</div>
+		<input id="to_claim" type="text" style="border: none; padding: 5px;" />
+		<input id="send_mail" type="submit" style="border: none; padding: 5px;" />
+		<input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;" />
+		<textarea id="compose_text">
+		</textarea>
+	</div>
+
+	<div class="modal fade" id="MModal" tabindex="-1">
+		<div class="modal-dialog">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="mmodal_dot" id="mmodal_dot"></div>
+					<div id="mmodal_step_1" class="step"></div>
+					<div id="mmodal_step_2" class="step"></div>
+					<div id="mmodal_step_3" class="step"></div>
+				</div>
+				<div class="modal-footer">
+					<p id="modal_message" style="direction: rtl; margin: 0;">
+						در حال پردازش
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 
