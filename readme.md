@@ -11,7 +11,7 @@ Yeees! Send and receive emails over blockchain
 
 # About EOB (Email Over Blockchain)
 It is a fun project, to demonstrate the possibility of how blockchain email could look like.  But I improved it over time.  
-and now `EOB` actually is a nice cool blockchain mail app.  
+And now `EOB` actually is a nice cool blockchain mail app.  
 
 I wrote it on top of the `LBRY` protocol.  It is not the best fit for such a service, but it is good enough.  
 I may continue this project, and maybe make a whole blockchain for it.  
