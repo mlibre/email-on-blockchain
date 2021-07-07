@@ -654,3 +654,14 @@ a:hover {
   float: right;
   width: 1.5rem;
 }
+#compose_text_wrapper 
+{
+  display: none; 
+  background-color: rgb(240, 240, 240); 
+  color: black; border-radius: 4px;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  position: fixed;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+}

@@ -38,6 +38,7 @@ async function lbry_update()
 				$("#inbox_messages_count").text(` (${total_email_count})`);
 			});
 		});
+		enablePopover()
 	}
 	catch (error) 
 	{
@@ -47,7 +48,7 @@ async function lbry_update()
 
 function lbry_channel_element(name, cid) 
 {
-	return `<li cid="${cid}" cname="${name}"><a href="#">${name}<span class="ball blue"></span></a></li>`;
+	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" data-bs-trigger="focus" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
 function lbry_message_element(cname, from, to, date, content) 
@@ -181,17 +182,16 @@ function destroy_md()
 }
 
 async function lbry_publish(e) {
-	$(e).attr("cid");
 	const info = {
 		content: {
-			title: "Title",
+			title: $("mail_title").val(),
 			text: simplemde.value()
 		},
 		from:	{
 			claim_id : $("#from_channel").val(),
 			name: channels_by_cid[$("#from_channel").val()].name
 		},
-		to: $("#to_claim").val()
+		to: $("#to_channel").val()
 	};
 	const result = await ipcRenderer.invoke("lbrynet_publish", info);
 	destroy_md();

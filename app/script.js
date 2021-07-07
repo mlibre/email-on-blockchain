@@ -3,7 +3,7 @@ const {ipcRenderer} = require("electron");
 const SimpleMDE = require("simplemde");
 $ = window.$ = window.jQuery = require("jquery");
 require("@popperjs/core");
-require("bootstrap");
+bootstrap = require("bootstrap");
 
 var messageIsOpen = false;
 let simplemde;
@@ -130,6 +130,13 @@ $(document).on("click", "a", function(e)
 {
 	e.preventDefault();
 });
+
+function enablePopover() {
+	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+		return new bootstrap.Popover(popoverTriggerEl)
+	})
+}
 
 function active_blockchain() 
 {

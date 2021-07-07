@@ -74,21 +74,56 @@
 
 	</div>
 
-	<div id="compose_text_wrapper" style="display: none; background-color: lightgrey; color: black; border-radius: 4px;
-		z-index: 5;top: 0;left: 0;position: fixed;transform: translate(calc(50vw - 50%), calc(50vh - 50%));">
-		<div style="padding: 10px; display: inline-block;">
-			From:
+	<from id="compose_text_wrapper">
+
+		<div class="row align-items-center mt-3 px-4">
+			<div class="col-1">
+				<label for="from_channel" class="col-form-label">From</label>
+			</div>
+			<div class="col-auto">
+				<input type="text" id="from_channel" class="form-control" aria-describedby="fromHelp">
+			</div>
+			<div class="col-auto">
+				<span id="fromHelp" class="form-text">
+					channel claimID
+				</span>
+			</div>
 		</div>
-		<input id="from_channel" type="text" style="border: none; padding: 5px;" />
-		<div style="padding: 10px; display: inline-block;">
-			To (channel claimID):
+
+		<div class="row align-items-center mt-3 px-4">
+			<div class="col-1">
+				<label for="to_channel" class="col-form-label">To</label>
+			</div>
+			<div class="col-auto">
+				<input type="text" id="to_channel" class="form-control" aria-describedby="toHelp">
+			</div>
+			<div class="col-auto">
+				<span id="toHelp" class="form-text">
+					channel claimID
+				</span>
+			</div>
 		</div>
-		<input id="to_claim" type="text" style="border: none; padding: 5px;" />
-		<input id="send_mail" type="submit" style="border: none; padding: 5px;" />
-		<input id="cancel_mail" type="button" value="cancel" style="border: none; padding: 5px;" />
+
+		<div class="row align-items-center mt-3 px-4">
+			<div class="col-1">
+				<label for="mail_title" class="col-form-label">Title</label>
+			</div>
+			<div class="col-auto">
+				<input type="text" id="mail_title" class="form-control" aria-describedby="mail_title_help">
+			</div>
+			<div class="col-auto">
+				<span id="mail_title_help" class="form-text">
+					Ttile
+				</span>
+			</div>
+		</div>
+		<div class="row align-items-center p-4">
+			<button id="cancel_mail" type="button" class="btn btn-warning col-3 mx-auto">Cancel</button>
+			<button id="send_mail" type="button" class="btn btn-primary col-3 mx-auto">Publish</button>
+		</div>
 		<textarea id="compose_text">
 		</textarea>
-	</div>
+	</from>
 
 	<div class="modal fade" id="MModal" tabindex="-1">
 		<div class="modal-dialog">
