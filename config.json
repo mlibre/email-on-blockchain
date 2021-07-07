@@ -4,6 +4,6 @@
 		"space": "/space/lbry/",
 		"inbox": "/space/lbry/inbox/",
 		"sent": "/space/lbry/sent/",
-		"draft": "/space/lbry/draft/"
+		"tmp": "/space/lbry/tmp/"
 	}
 }

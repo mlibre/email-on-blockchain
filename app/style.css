@@ -635,8 +635,8 @@ a:hover {
 }
 
 .CodeMirror, .CodeMirror-scroll {
-	min-height: 400px !important;
-	min-width: 700px !important;
+	min-height: 40vh !important;
+	min-width: 65vw !important;
 }
 
 #backToPage
@@ -654,10 +654,10 @@ a:hover {
   float: right;
   width: 1.5rem;
 }
-#compose_text_wrapper 
+#lbry_compose_text 
 {
   display: none; 
-  background-color: rgb(240, 240, 240); 
+  background-color: rgb(243, 243, 243); 
   color: black; border-radius: 4px;
   z-index: 5;
   top: 0;

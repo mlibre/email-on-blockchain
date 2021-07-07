@@ -6,7 +6,7 @@
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
-	<meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
 	<link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="./frameworks/mmodal/style.css">
 
@@ -23,7 +23,6 @@
 					<a href="#">Inbox<span id="inbox_messages_count"></span></a>
 				</li>
 				<li><a href="#">Sent</a></li>
-				<li><a href="#">Drafts</a></li>
 				<li><a href="#">Trash</a></li>
 			</ul>
 
@@ -38,7 +37,7 @@
 
 			<div class="separator"></div>
 			<div class="menu-segment px-3">
-				<div class="title p-3">Blockchains<i class="icon fas fa-th-large"></i></i></div>
+				<div class="title p-3">Blockchains<i class="icon fas fa-th-large"></i></div>
 				<ul id="blockchains" class="px-1 labels">
 					<li name="LBRY" class="px-3"><a href="#">LBRY<img class="mt-1" src="../assets/lbry.png" alt="lbry"></a>
 					</li>
@@ -74,56 +73,85 @@
 
 	</div>
 
-	<from id="compose_text_wrapper">
+	<form id="lbry_compose_text" action="#" class="needs-validation" novalidate>
 
-		<div class="row align-items-center mt-3 px-4">
+		<div class="row align-items-center mt-3 px-5 pt-4">
 			<div class="col-1">
 				<label for="from_channel" class="col-form-label">From</label>
 			</div>
-			<div class="col-auto">
-				<input type="text" id="from_channel" class="form-control" aria-describedby="fromHelp">
+			<div class="col-7">
+				<input type="text" id="from_channel" class="form-control" aria-describedby="fromHelp" required>
+				<div class="invalid-feedback">
+					Required
+				</div>
 			</div>
 			<div class="col-auto">
 				<span id="fromHelp" class="form-text">
-					channel claimID
+					channel claimID, You can click on the channels, sidebar
 				</span>
 			</div>
 		</div>
 
-		<div class="row align-items-center mt-3 px-4">
+		<div class="row align-items-center mt-3 px-5">
 			<div class="col-1">
 				<label for="to_channel" class="col-form-label">To</label>
 			</div>
-			<div class="col-auto">
-				<input type="text" id="to_channel" class="form-control" aria-describedby="toHelp">
+			<div class="col-7">
+				<input type="text" id="to_channel" class="form-control" aria-describedby="toHelp" required>
+				<div class="invalid-feedback">
+					Required
+				</div>
 			</div>
 			<div class="col-auto">
 				<span id="toHelp" class="form-text">
-					channel claimID
+					channel claimID, You can find it in a channel info
 				</span>
 			</div>
 		</div>
 
-		<div class="row align-items-center mt-3 px-4">
+		<div class="row align-items-center mt-3 px-5">
 			<div class="col-1">
-				<label for="mail_title" class="col-form-label">Title</label>
+				<label for="mail_name" class="col-form-label">Name</label>
+			</div>
+			<div class="col-7">
+				<input type="text" pattern="[A-Za-z0-9-]*" id="mail_name" class="form-control"
+					aria-describedby="mail_name_help" required>
+				<div class="invalid-feedback">
+					Required, Name can only be a-Z, A-Z, 0-9 and dash
+				</div>
 			</div>
 			<div class="col-auto">
-				<input type="text" id="mail_title" class="form-control" aria-describedby="mail_title_help">
-			</div>
-			<div class="col-auto">
-				<span id="mail_title_help" class="form-text">
-					Ttile
+				<span id="mail_name_help" class="form-text">
+					The tracnaction name. Publicly visible
 				</span>
 			</div>
 		</div>
-		<div class="row align-items-center p-4">
-			<button id="cancel_mail" type="button" class="btn btn-warning col-3 mx-auto">Cancel</button>
-			<button id="send_mail" type="button" class="btn btn-primary col-3 mx-auto">Publish</button>
+
+		<div class="row align-items-center mt-3 px-5 mb-4">
+			<div class="col-1">
+				<label for="mail_title" class="col-form-label">Title</label>
+			</div>
+			<div class="col-7">
+				<input type="text" id="mail_title" class="form-control" aria-describedby="mail_title_help" required>
+				<div class="invalid-feedback">
+					Required
+				</div>
+			</div>
+			<div class="col-auto">
+				<span id="mail_title_help" class="form-text">
+					The mail title. Publicly visible
+				</span>
+			</div>
 		</div>
 		<textarea id="compose_text">
 		</textarea>
-	</from>
+		<div class="row align-items-center px-4 pb-4">
+			<div class="col-1"></div>
+			<button id="cancel_mail" type="button" class="btn btn-danger col-2 mx-auto py-2">Cancel</button>
+			<button id="send_mail" type="submit" class="btn btn-primary col-2 mx-auto py-2">Publish</button>
+			<div class="col-1"></div>
+		</div>
+	</form>
 
 	<div class="modal fade" id="MModal" tabindex="-1">
 		<div class="modal-dialog">
@@ -136,18 +164,19 @@
 					<div id="mmodal_step_3" class="step"></div>
 				</div>
 				<div class="modal-footer">
-					<p id="modal_message" style="direction: rtl; margin: 0;">
-						در حال پردازش
+					<p id="modal_message" style="margin: 0;">
+
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<script src="./script.js"></script>
+	<script src="./lib/lbry.js"></script>
+	<script src="./frameworks/mmodal/script.js"></script>
+
 </body>
 
-<script src="./script.js"></script>
-<script src="./lib/lbry.js"></script>
-<script src="./frameworks/mmodal/script.js"></script>
 
 </html>

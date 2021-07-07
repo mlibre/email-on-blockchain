@@ -13,7 +13,7 @@ async function createWindow (width, height)
 	{
 		await mkdir(path.join(__dirname, config.lbry.inbox));
 		await mkdir(path.join(__dirname, config.lbry.sent));
-		await mkdir(path.join(__dirname, config.lbry.draft));
+		await mkdir(path.join(__dirname, config.lbry.tmp));
 	}
 	catch {}
 	// Menu.setApplicationMenu(null);

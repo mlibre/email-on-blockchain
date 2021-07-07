@@ -1,6 +1,10 @@
 const lbry_mails = {}; // transactions information, claimID, ...
 let channels_by_cid = {};
 
+$("#lbry_compose_text #cancel_mail").on("click", function () 
+{
+	lbry_destroy_md();
+});
 
 async function lbry_status(params) 
 {
@@ -24,7 +28,8 @@ async function lbry_update()
 			const mails = await ipcRenderer.invoke("lbry_mails", channel.claim_id);
 			mails.items.forEach((mail, index2) =>
 			{
-				mail.to = mail.name.match(/mail-to-(.*)-\d/)[ 1 ];
+				
+				mail.to = mail.value.tags[0];
 				lbry_mails[ mail.claim_id ] = mail;
 				total_email_count++;
 				$("#message-list").prepend(lbry_mail_element(
@@ -48,7 +53,7 @@ async function lbry_update()
 
 function lbry_channel_element(name, cid) 
 {
-	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" data-bs-trigger="focus" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
+	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
 function lbry_message_element(cname, from, to, date, content) 
@@ -154,20 +159,20 @@ async function lbry_message_show(item)
 	messageIsOpen = true;
 }
 
-function create_md() 
+function lbry_create_md() 
 {
-	destroy_md();
+	lbry_destroy_md();
 	simplemde = new SimpleMDE({
 		element: $("#compose_text")[ 0 ],
 		autofocus: true,
 		placeholder: "Type here...",
 		hideIcons: [ "guide", "fullscreen" ],
 	});
-	$("#compose_text_wrapper").show();
+	$("#lbry_compose_text").show();
 	showOverlay();
 }
 
-function destroy_md() 
+function lbry_destroy_md() 
 {
 	let val;
 	if (simplemde)
@@ -176,7 +181,7 @@ function destroy_md()
 		val = simplemde.toTextArea();
 		simplemde = null;
 	}
-	$("#compose_text_wrapper").hide();
+	$("#lbry_compose_text").hide();
 	hideOverlay();
 	return val;
 }
@@ -184,7 +189,8 @@ function destroy_md()
 async function lbry_publish(e) {
 	const info = {
 		content: {
-			title: $("mail_title").val(),
+			name: $("#mail_name").val(),
+			title: $("#mail_title").val(),
 			text: simplemde.value()
 		},
 		from:	{
@@ -194,5 +200,11 @@ async function lbry_publish(e) {
 		to: $("#to_channel").val()
 	};
 	const result = await ipcRenderer.invoke("lbrynet_publish", info);
-	destroy_md();
+	if(result.error)
+	{
+		failMmodal(result.error.message)
+	}
+	else {
+		lbry_destroy_md();
+	}
 }
