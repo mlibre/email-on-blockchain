@@ -3,7 +3,7 @@ Yes! an actual Blockchain Mail app :green_heart:
 Yeees! Send and receive emails over blockchain
 
 # Why Blockchain mail ?
-1. First of all, YOU are in control. No one can restrict your access nor receiving a mail
+1. First of all, YOU are in control. No one can restrict your access in any way.
 2. Finally no spam. Because sending emails over blockchain costs a fee.
 3. Secure by default. blockchain is secure by default. cryptography, no single point of failure, ...
 4. It is always there. Your email is always there. no one can delete them nor change them
