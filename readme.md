@@ -59,8 +59,8 @@ npm start
 
 ## Issues with LBRY
 
-* Mails on lbry protocols are not encrypted
-* If sender of the mail abandon the claim, metadata will be lost
+* Mails on lbry protocols are not encrypted yet!
+* If the sender of the mail abandon the claim, metadata will be lost
 
 ## LICENSE
 
