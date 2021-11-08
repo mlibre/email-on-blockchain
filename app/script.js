@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 /* eslint-disable prefer-const */
-'use strict'
 
 const { ipcRenderer } = require("electron");
 const SimpleMDE = require("simplemde");
@@ -12,31 +12,16 @@ let simplemde;
 
 $(function ($)
 {
+	// Click on LBRY Blockchain
 	$("#blockchains li[name=LBRY]").click();
-	// Example starter JavaScript for disabling form submissions if there are invalid fields
 });
 
-$(document).on('submit', "#lbry_compose_text", function (event)
-{
-	let form = document.getElementById("lbry_compose_text");
-	if (!form.checkValidity())
-	{
-		event.preventDefault()
-		event.stopPropagation()
-	}
-	else
-	{
-		lbry_publish(event);
-	}
-	form.classList.add('was-validated')
-});
-
-$("#refresh").on("click", function () 
+$("#inboxElement").on("click", async function () 
 {
 	let bc = active_blockchain();
 	if (bc == "LBRY")
 	{
-		lbry_update();
+		await lbry_init();
 	}
 });
 
@@ -55,18 +40,18 @@ $("#blockchains li").on("click", async function (event)
 	if (bc == "LBRY")
 	{
 		$("[rbc=LBRY]").show();
-		let ls = await lbry_status();
+		let ls = await lbrynet_status();
 		if (ls.error)
 		{
 			failMmodal(ls.message);
 			return;
 		}
-		await lbry_update();
+		await lbry_init();
 	}
 	$(this).addClass("bg-secondary");
 });
 
-$(document).on("click", "#main .message-list li", function (e) 
+$(document).on("click", "#message-list li", function (e) 
 {
 	let bc = active_blockchain();
 	var item = $(this);
@@ -77,11 +62,11 @@ $(document).on("click", "#main .message-list li", function (e)
 	}
 });
 
-function showOverlay() 
+function showOverlay () 
 {
 	$("body").addClass("show-main-overlay");
 }
-function hideOverlay() 
+function hideOverlay () 
 {
 	$("body").removeClass("show-main-overlay");
 	let bc = active_blockchain();
@@ -89,14 +74,14 @@ function hideOverlay()
 	{
 		if (simplemde != null)
 		{
-			lbry_destroy_md()
+			lbry_destroy_md();
 		}
 	}
 }
-function hideMessage() 
+function hideMessage () 
 {
 	$("body").removeClass("show-message");
-	$("#main .message-list li").removeClass("active");
+	$("#message-list li").removeClass("active");
 	messageIsOpen = false;
 }
 
@@ -106,7 +91,7 @@ $("#sidebar_bars").on("click", function ()
 	showOverlay();
 });
 
-function hideSidebar() 
+function hideSidebar () 
 {
 	$("body").removeClass("show-sidebar");
 }
@@ -134,16 +119,55 @@ $(document).on("click", "a", function (e)
 	e.preventDefault();
 });
 
-function enablePopover()
+function enablePopover ()
 {
-	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+	var popoverTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"popover\"]"));
 	var popoverList = popoverTriggerList.map(function (popoverTriggerEl)
 	{
-		return new bootstrap.Popover(popoverTriggerEl)
-	})
+		return new bootstrap.Popover(popoverTriggerEl);
+	});
 }
 
-function active_blockchain() 
+function active_blockchain () 
 {
 	return $("#blockchains li[class~=bg-secondary]").attr("name");
+}
+
+
+"use strict";
+
+$("#MModal").on("hidden.bs.modal" , function ()
+{
+	$("#modal_message").text("");
+	$("#mmodal_dot").css("animation","");
+	$("#mmodal_dot").removeClass();
+	$("#mmodal_dot").addClass("mmodal_dot");
+	$(".mmodal_step").css("display","");
+});
+
+function successMmodal (text)
+{
+	$("#MModal").modal("show");
+	$("#modal_message").text(text);
+	$("#mmodal_dot").css("animation","none");
+	$("#mmodal_dot").removeClass();
+	$("#mmodal_dot").addClass("far fa-smile");
+	$(".mmodal_step").css("display","none");
+}
+function failMmodal (text)
+{
+	$("#MModal").modal("show");
+	$("#modal_message").text(text);
+	$("#mmodal_dot").css("animation","none");
+	$("#mmodal_dot").removeClass();
+	$("#mmodal_dot").addClass("far fa-frown");
+	$(".mmodal_step").css("display","none");	
+}
+
+function hideMmodalIn1d1S ()
+{
+	setTimeout(function ()
+	{
+		$("#MModal").modal("hide");
+	}, 1100);
 }

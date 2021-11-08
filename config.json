@@ -3,7 +3,6 @@
 		"lbrynet": "http://localhost:5279/",
 		"space": "/space/lbry/",
 		"inbox": "/space/lbry/inbox/",
-		"sent": "/space/lbry/sent/",
 		"tmp": "/space/lbry/tmp/"
 	}
 }

@@ -1,4 +1,4 @@
-const lbry_mails = {}; // transactions information, claimID, ...
+let lbry_mails; // transactions information, claimID, ...
 let channels_by_cid = {};
 
 $("#lbry_compose_text #cancel_mail").on("click", function () 
@@ -6,20 +6,36 @@ $("#lbry_compose_text #cancel_mail").on("click", function ()
 	lbry_destroy_md();
 });
 
-async function lbry_status(params) 
+$(document).on("submit", "#lbry_compose_text", function (event)
+{
+	const form = document.getElementById("lbry_compose_text");
+	if (!form.checkValidity())
+	{
+		event.preventDefault();
+		event.stopPropagation();
+	}
+	else
+	{
+		lbry_publish(event);
+	}
+	form.classList.add("was-validated");
+});
+
+async function lbrynet_status (params) 
 {
 	return await ipcRenderer.invoke("lbrynet_status");
 }
 
-async function lbry_update() 
+async function lbry_init () 
 {
 	try 
 	{
 		let total_email_count = 0;
 		const channels = await ipcRenderer.invoke("lbry_channels", ...[]);
-		channels_by_cid = {};
 		$("#message-list").empty();
 		$("#channels").empty();
+		channels_by_cid = {};
+		lbry_mails = {};
 		channels.forEach(async (channel, index) =>
 		{
 			channels_by_cid[ channel.claim_id ] = channel;
@@ -43,7 +59,7 @@ async function lbry_update()
 				$("#inbox_messages_count").text(` (${total_email_count})`);
 			});
 		});
-		enablePopover()
+		enablePopover();
 	}
 	catch (error) 
 	{
@@ -51,12 +67,12 @@ async function lbry_update()
 	}
 }
 
-function lbry_channel_element(name, cid) 
+function lbry_channel_element (name, cid) 
 {
 	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
 }
 
-function lbry_message_element(cname, from, to, date, content) 
+function lbry_message_element (cname, from, to, date, content) 
 {
 	return `
 	<div class="header">
@@ -84,7 +100,7 @@ function lbry_message_element(cname, from, to, date, content)
 	</div>`;
 }
 
-function lbry_mail_element(sender, title, cname, id, date, claim_id) 
+function lbry_mail_element (sender, title, cname, id, date, claim_id) 
 {
 	return `
 	<li class="row unread" cid="${claim_id}">
@@ -109,7 +125,7 @@ function lbry_mail_element(sender, title, cname, id, date, claim_id)
 	</li>`;
 }
 
-function lbry_mail_click(item, target) 
+function lbry_mail_click (item, target) 
 {
 	if (target.is("label")) 
 	{
@@ -143,7 +159,7 @@ function lbry_mail_click(item, target)
 	}
 }
 
-async function lbry_message_show(item)
+async function lbry_message_show (item)
 {
 	const mai = lbry_mails[ $(item).attr("cid") ];
 	const content = await ipcRenderer.invoke("lbry_content", mai);
@@ -159,7 +175,7 @@ async function lbry_message_show(item)
 	messageIsOpen = true;
 }
 
-function lbry_create_md() 
+function lbry_create_md () 
 {
 	lbry_destroy_md();
 	simplemde = new SimpleMDE({
@@ -172,7 +188,7 @@ function lbry_create_md()
 	showOverlay();
 }
 
-function lbry_destroy_md() 
+function lbry_destroy_md () 
 {
 	let val;
 	if (simplemde)
@@ -186,7 +202,8 @@ function lbry_destroy_md()
 	return val;
 }
 
-async function lbry_publish(e) {
+async function lbry_publish (e) 
+{
 	const info = {
 		content: {
 			name: $("#mail_name").val(),
@@ -200,11 +217,12 @@ async function lbry_publish(e) {
 		to: $("#to_channel").val()
 	};
 	const result = await ipcRenderer.invoke("lbrynet_publish", info);
-	if(result.error)
+	if (result.error)
 	{
-		failMmodal(result.error.message)
+		failMmodal(result.error.message);
 	}
-	else {
+	else 
+	{
 		lbry_destroy_md();
 	}
 }

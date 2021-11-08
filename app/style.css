@@ -274,6 +274,7 @@ a:hover {
 }
 #main .message-list li {
   position: relative;
+  overflow: hidden;
   height: 50px;
   line-height: 50px;
   cursor: default;
@@ -549,7 +550,7 @@ a:hover {
   overflow: hidden;
 }
 .nano > .nano-content {
-  position: absolute;
+  /* position: absolute; */
   overflow: scroll;
   overflow-x: hidden;
   top: 0;
@@ -647,4 +648,142 @@ a:hover {
   left: 0;
   position: fixed;
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+}
+
+ /* Modal */
+
+.modal
+{
+    top: 15%;
+    outline: none;
+}
+/* .modal-dialog
+{
+    width: 35%;
+} */
+.modal-content
+{
+    min-height: 300px;
+
+    /*border: 1px solid #999;*/
+    border: none;
+    border-radius: 4px;
+
+    background-color: #f5f5f5;
+    box-shadow: 0 0 20px rgba(0, 0 , 0 , 0.4);
+
+    background: linear-gradient(rgb(15, 154, 218), rgb(0 ,118, 173));
+}
+
+.modal-body
+{
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+}
+.mmodal_dot
+{
+    width: 30px;
+    height: 30px;
+
+    background-color: rgba(255,255,255,0.95);
+}
+#mmodal_dot
+{
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    bottom: 50%;
+
+    font-size: 43px;
+    text-align: center;
+
+    border-radius: 50%;
+
+    color: rgba(255,255,255,0.95);
+
+    transform-origin: center bottom;
+    animation: mmodal_dot .7s ease-in-out infinite;
+}
+@keyframes mmodal_dot
+{
+    0% { transform: scale(1 , 0.7) }
+    20% { transform: scale(0.7 , 1.2) }
+    40% { transform: scale(1 , 1) }
+    45% { transform: scale(1 , 1) }
+    50% { bottom: 70%; }
+    80% { transform: scale(0.7 , 1.2) }
+    90% { transform: scale(0.7 , 1.2) }
+    100% { transform: scale(1 , 0.7) }
+}
+
+.mmodal_step
+{
+    position: absolute;
+
+    width: 32px;
+    height: 7px;
+
+    border: 2px solid #FFFFFF;
+    border-radius: 6px;
+}
+
+#mmodal_step_1
+{
+    animation: mmodal_step 2.1s linear infinite;
+}
+#mmodal_step_2
+{
+    animation: mmodal_step 2.1s linear infinite -0.7s;
+}
+#mmodal_step_3
+{
+    animation: mmodal_step 2.1s linear infinite -1.4s;
+}
+
+@keyframes mmodal_step
+{
+    0%
+    {
+        top: 26%;
+        right: 28%;
+        opacity: 0;
+    }
+    50%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        top: 61%;
+        right: 56%;
+        opacity: 0;
+    }
+}
+
+.modal-footer
+{
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 80%;
+    bottom: 15%;
+
+    /*padding: 0;*/
+
+    text-align: center;
+    font-size: 18.5px;
+    color: #ffffff;
+
+    border-bottom: 1px solid #e5e5e5;
+    border-top: none;
 }

@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
 	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="./frameworks/mmodal/style.css">
 
 </head>
 
@@ -20,47 +19,38 @@
 			<a id="compose" class="btn btn-success btn-lg d-block ms-2 mb-5">Compose</a>
 			<ul class=" menu-segment px-5 mx-4">
 				<li class="active">
-					<a href="#">Inbox<span id="inbox_messages_count"></span></a>
+					<a id="inboxElement" style="margin-left: -65px;
+					margin-right: -70px;
+					text-align: center;
+					padding-left: 50px;" href="#">Inbox<span id="inbox_messages_count"></span></a>
 				</li>
-				<li><a href="#">Sent</a></li>
-				<li><a href="#">Trash</a></li>
 			</ul>
 
-			<span rbc="LBRY" style="display: none;">
+			<div rbc="LBRY" style="display: none;">
 				<div class="separator"></div>
 				<div class="menu-segment px-3">
 					<div class="title p-3">Channels<i class="icon fas fa-ellipsis-h"></i></div>
 					<ul id="channels" class="p-0 labels">
 					</ul>
 				</div>
-			</span>
+			</div>
 
 			<div class="separator"></div>
 			<div class="menu-segment px-3">
 				<div class="title p-3">Blockchains<i class="icon fas fa-th-large"></i></div>
 				<ul id="blockchains" class="px-1 labels">
-					<li name="LBRY" class="px-3"><a href="#">LBRY<img class="mt-1" src="../assets/lbry.png" alt="lbry"></a>
+					<li name="LBRY" class="px-3"><a href="#">LBRY<img class="mt-1" src="./lbry.png" alt="lbry"></a>
 					</li>
 				</ul>
 			</div>
+
 			<div class="bottom-padding"></div>
 		</div>
 	</aside>
+
 	<main id="main">
 		<div id="sidebar_bars" class="sr-only"><i class="fas fa-bars"></i></div>
 		<div class="overlay"></div>
-		<header class="header">
-		</header>
-		<div class="action-bar">
-			<ul class="m-0">
-				<li id="refresh">
-					<span class="fa-stack" style="vertical-align: top;">
-						<i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
-						<i class="fas fa-sync fa-stack-1x"></i>
-					</span>
-				</li>
-			</ul>
-		</div>
 		<div id="main-nano-wrapper" class="nano">
 			<div class="nano-content container-fluid">
 				<ul id="message-list" class="message-list pt-2">
@@ -122,7 +112,7 @@
 			</div>
 			<div class="col-auto">
 				<span id="mail_name_help" class="form-text">
-					The tracnaction name. Publicly visible
+					The transaction name. Publicly visible
 				</span>
 			</div>
 		</div>
@@ -173,10 +163,8 @@
 	</div>
 
 	<script src="./script.js"></script>
-	<script src="./lib/lbry.js"></script>
-	<script src="./frameworks/mmodal/script.js"></script>
+	<script src="./lbry.js"></script>
 
 </body>
-
 
 </html>

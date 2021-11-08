@@ -5,14 +5,13 @@ const config = require("./config.json");
 const util = require("util");
 
 require("electron-reload")(__dirname);
-require("./lib/lbry/ipc");
+require("./lbry");
 
 async function createWindow (width, height) 
 {
 	try 
 	{
 		await mkdir(path.join(__dirname, config.lbry.inbox));
-		await mkdir(path.join(__dirname, config.lbry.sent));
 		await mkdir(path.join(__dirname, config.lbry.tmp));
 	}
 	catch {}
@@ -20,7 +19,7 @@ async function createWindow (width, height)
 	const win = new BrowserWindow({
 		width,
 		height,
-		icon: path.join(__dirname, "/assets/logo.png"),
+		icon: path.join(__dirname, "/app/assets/logo.png"),
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
@@ -53,7 +52,7 @@ app.on("window-all-closed", () =>
 	}
 });
 
-log = function(obj) 
+log = function (obj) 
 {
-	console.log(util.inspect(obj, false, null, true /* enable colors */));
+	console.log(util.inspect(obj, false, null, true));
 };
