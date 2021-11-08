@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 let lbry_mails; // transactions information, claimID, ...
 let channels_by_cid = {};
 
@@ -21,7 +22,7 @@ $(document).on("submit", "#lbry_compose_text", function (event)
 	form.classList.add("was-validated");
 });
 
-async function lbrynet_status (params) 
+async function lbrynet_status () 
 {
 	return await ipcRenderer.invoke("lbrynet_status");
 }
@@ -67,64 +68,6 @@ async function lbry_init ()
 	}
 }
 
-function lbry_channel_element (name, cid) 
-{
-	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
-}
-
-function lbry_message_element (cname, from, to, date, content) 
-{
-	return `
-	<div class="header">
-		<h1 class="page-title">
-			<a id="backToPage">
-				<span class="fa-stack" style="vertical-align: top;">
-					<i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
-					<i class="fas fa-arrow-left fa-stack-1x"></i>
-				</span>
-			</a>
-			${cname}
-		</h1>
-		<p>From <a href="#">${from}</a> to <a href="#">${to}</a>, on <a href="#">${date}</a></p>
-	</div>
-	<div id="message-nano-wrapper" class="nano">
-		<div class="nano-content">
-			<ul class="message-container">
-				<li class="sent">
-					<div class="message">
-						${content}
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>`;
-}
-
-function lbry_mail_element (sender, title, cname, id, date, claim_id) 
-{
-	return `
-	<li class="row unread" cid="${claim_id}">
-		<div class="col">
-			<div class="checkbox-wrapper">
-				<input type="checkbox" id="${id}">
-				<label for="${id}" class="toggle"></label>
-			</div>
-		</div>
-		<div class="col-2 ml-2">
-			<span class="title">${sender}</span>
-		</div>
-		<div class="col-4">
-			<div class="subject">${title}</div>
-		</div>
-		<div class="col-3">
-			<div class="channel_name">${cname}</div>
-		</div>
-		<div class="col-2">
-			<div class="date">${date}</div>
-		</div>
-	</li>`;
-}
-
 function lbry_mail_click (item, target) 
 {
 	if (target.is("label")) 
@@ -146,20 +89,20 @@ function lbry_mail_click (item, target)
 				item.addClass("active");
 				setTimeout(function () 
 				{
-					lbry_message_show(item);
+					lbry_mail_show(item);
 				}, 300);
 			}
 			else 
 			{
 				item.addClass("active");
-				lbry_message_show(item);
+				lbry_mail_show(item);
 			}
 			showOverlay();
 		}
 	}
 }
 
-async function lbry_message_show (item)
+async function lbry_mail_show (item)
 {
 	const mai = lbry_mails[ $(item).attr("cid") ];
 	const content = await ipcRenderer.invoke("lbry_content", mai);
@@ -225,4 +168,63 @@ async function lbry_publish (e)
 	{
 		lbry_destroy_md();
 	}
+}
+
+
+function lbry_channel_element (name, cid) 
+{
+	return `<li cid="${cid}" cname="${name}" data-bs-toggle="popover" title="Claim ID" data-bs-content="${cid}" ><a href="#">${name}<span class="ball blue"></span></a></li>`;
+}
+
+function lbry_message_element (cname, from, to, date, content) 
+{
+	return `
+	<div class="header">
+		<h1 class="page-title">
+			<a id="backToPage">
+				<span class="fa-stack" style="vertical-align: top;">
+					<i class="far fa-circle fa-stack-2x" style="color:lightgray"></i>
+					<i class="fas fa-arrow-left fa-stack-1x"></i>
+				</span>
+			</a>
+			${cname}
+		</h1>
+		<p>From <a href="#">${from}</a> to <a href="#">${to}</a>, on <a href="#">${date}</a></p>
+	</div>
+	<div id="message-nano-wrapper" class="nano">
+		<div class="nano-content">
+			<ul class="message-container">
+				<li class="sent">
+					<div class="message">
+						${content}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>`;
+}
+
+function lbry_mail_element (sender, title, cname, id, date, claim_id) 
+{
+	return `
+	<li class="row unread" cid="${claim_id}">
+		<div class="col">
+			<div class="checkbox-wrapper">
+				<input type="checkbox" id="${id}">
+				<label for="${id}" class="toggle"></label>
+			</div>
+		</div>
+		<div class="col-2 ml-2">
+			<span class="title">${sender}</span>
+		</div>
+		<div class="col-4">
+			<div class="subject">${title}</div>
+		</div>
+		<div class="col-3">
+			<div class="channel_name">${cname}</div>
+		</div>
+		<div class="col-2">
+			<div class="date">${date}</div>
+		</div>
+	</li>`;
 }

@@ -134,8 +134,6 @@ function active_blockchain ()
 }
 
 
-"use strict";
-
 $("#MModal").on("hidden.bs.modal" , function ()
 {
 	$("#modal_message").text("");
