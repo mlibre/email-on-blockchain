@@ -27,8 +27,8 @@ Each `LBRY` channel is an account here. You can send and receive emails to/from 
 
 ## Screenshots
 
-![screenshot](./assets/screenshot.png)
-![screenshot 2](./assets/screenshot_2.png)
+![screenshot](./screenshots/screenshot.png)
+![screenshot 2](./screenshots/screenshot_2.png)
 
 ## Requirements
 

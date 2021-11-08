@@ -11,6 +11,7 @@ async function createWindow (width, height)
 {
 	try 
 	{
+		await mkdir(path.join(__dirname, config.lbry.space));
 		await mkdir(path.join(__dirname, config.lbry.inbox));
 		await mkdir(path.join(__dirname, config.lbry.tmp));
 	}
@@ -19,7 +20,7 @@ async function createWindow (width, height)
 	const win = new BrowserWindow({
 		width,
 		height,
-		icon: path.join(__dirname, "/app/assets/logo.png"),
+		icon: path.join(__dirname, "/app/logo.png"),
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
