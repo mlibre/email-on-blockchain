@@ -32,7 +32,7 @@ Each `LBRY` channel is an account here. You can send and receive emails to/from 
 
 ## Requirements
 
-* lbrynet. you can run `lbrynet` by running the `LBRY` desktop application.
+* `lbrynet`: you can run `lbrynet` by running the `LBRY` desktop application.
 
 > <https://lbry.com/get>
 
@@ -55,7 +55,6 @@ Then run the app.
 
 ```bash
 npm start
-# npm run make
 ```
 
 ## Issues with LBRY
@@ -65,9 +64,9 @@ npm start
 
 ## LICENSE
 
-GPL V3 & LICENSE File
+[LICENSE File](./LICENSE)
 
-## Donate :heartpulse:
+## Donate :heartpulse
 
 ETH:
 > 0xc9b64496986E7b6D4A68fDF69eF132A35e91838e
