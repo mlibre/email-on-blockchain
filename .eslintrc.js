@@ -2,14 +2,16 @@ module.exports = {
 	"env": {
 		"commonjs": true,
 		"es2021": true,
-		"node": true
+		"node": true,
+		"mocha": true
 	},
 	"extends": [
 		"eslint:recommended",
 		"plugin:node/recommended"
 	],
 	"parserOptions": {
-		"ecmaVersion": 12
+		"ecmaVersion": 12,
+		"impliedStrict": true
 	},
 	"rules": {
 		"linebreak-style": [
@@ -35,6 +37,10 @@ module.exports = {
 				"allowSingleLine": true
 			}
 		],
+		// "arrow-parens": [
+		//      "error",
+		//      "always"
+		// ],
 		"arrow-body-style": [
 			"error",
 			"always"
@@ -125,6 +131,13 @@ module.exports = {
 		"space-before-blocks": [
 			"warn",
 		],
+		"space-before-function-paren": ["error", "always"],
+		"keyword-spacing": [
+			"error"
+		],
+		// "func-call-spacing": [
+		//      "error", "always"
+		// ],
 		"function-paren-newline": [
 			"warn",
 		],
@@ -132,7 +145,7 @@ module.exports = {
 			"warn",
 		],
 		"no-process-exit": "off",
-		"require-await": "error",
+		"require-await": "warn",
 		"indent": [
 			"error",
 			"tab", 
@@ -140,15 +153,8 @@ module.exports = {
 				"MemberExpression": 0
 			}
 		],
-		"node/no-unpublished-import": [
-			"error", {
-				"allowModules": ["electron" , "electron-reload"]
-			}
-		],
-		"node/no-unpublished-require": [
-			"error", {
-				"allowModules": ["electron" , "electron-reload"]
-			}
-		]
+		"no-tabs": 0,
+		"node/no-unpublished-import": "off",
+		"node/no-unpublished-require": "off"
 	}
 };
