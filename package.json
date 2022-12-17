@@ -21,6 +21,10 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mlibre/email-on-blockchain"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.10.2",
